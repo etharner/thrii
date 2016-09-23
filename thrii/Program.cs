@@ -1,5 +1,4 @@
 ﻿using System;
-using Otter;
 
 namespace thrii
 {
@@ -7,7 +6,7 @@ namespace thrii
 	{
 		public static void Main(string[] args)
 		{
-			new Engine().Start();
+			new Game().Start();
 		}
 	}
 }

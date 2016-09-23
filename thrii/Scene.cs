@@ -2,9 +2,9 @@
 
 namespace thrii
 {
-	public class Engine
+	public class Scene
 	{
-		public Engine()
+		public Scene()
 		{
 		}
 	}
