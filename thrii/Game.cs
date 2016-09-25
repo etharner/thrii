@@ -3,12 +3,10 @@
 	public class Game
 	{
 		Engine engine;
-		Settings settings;
 
 		public Game()
 		{
-			settings = new Settings(800, 600, "TRHII", "icon.png");
-			engine = new Engine(settings);
+			engine = new Engine();
 		}
 
 		public void Start() {

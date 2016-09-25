@@ -2,20 +2,13 @@
 
 namespace thrii
 {
-	public class Component
+	public class PositionComponent
 	{
-		public Component()
-		{
-		}
+		public uint X { get; set; }
+		public uint Y { get; set; }
 	}
 
-	public class PositionComponent : Component
-	{
-		public int X { get; set; }
-		public int Y { get; set; }
-	}
-
-	public class DisplayComponent : Component
+	public class DisplayComponent
 	{
 		public Transformable DisplayObject { get; set; }
 	}

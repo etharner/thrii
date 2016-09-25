@@ -1,14 +1,13 @@
 ﻿using System;
-using SFML;
 using SFML.Window;
 using SFML.Graphics;
-using SFML.System;
 
 namespace thrii
 {
 	public class Drawer
 	{
 		RenderWindow window;
+		Input input;
 		Engine engine;
 		
 		public Drawer(uint width, uint height, string name, string iconPath, Engine e)
@@ -16,6 +15,7 @@ namespace thrii
 			window = new RenderWindow(new VideoMode(width, height), name);
 			SetIcon(iconPath);
 			window.Closed += OnClosed;
+			input = new Input(e, window);
 			engine = e;
 		}
 
@@ -40,6 +40,7 @@ namespace thrii
 			while (window.IsOpen)
 			{
 				window.DispatchEvents();
+				input.CheckInput();
 				engine.Update();
 				window.Display();
 			}

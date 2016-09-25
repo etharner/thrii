@@ -27,10 +27,8 @@ namespace thrii
 			{
 				return componentList[componentClass];
 			}
-			else
-			{
-				return null;
-			}
+
+			return null;
 		}
 	}
 }

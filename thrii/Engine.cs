@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace thrii
 {
@@ -9,13 +8,15 @@ namespace thrii
 		List<ISystem> systemList;
 		Dictionary<string, List<Node>> nodes;
 
-		public Engine(Settings settings)
+		public Engine()
 		{
 			systemList = new List<ISystem>();
-			var renderSystem = new RenderSystem(settings, this);
+			var renderSystem = new RenderSystem(this);
 			AddSystem(renderSystem);
 
 			nodes = new Dictionary<string, List<Node>>();
+
+			SwitchScene(new MenuScene());
 
 			renderSystem.Render();
 		}
@@ -63,8 +64,9 @@ namespace thrii
 			}
 		}
 
-		void AddScene(Scene scene) 
+		public void SwitchScene(Scene scene) 
 		{
+			nodes.Clear();
 			foreach (var entity in scene.EntityList)
 			{
 				AddEntity(entity);
