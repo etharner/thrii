@@ -1,18 +1,22 @@
 ﻿using System;
+using SFML;
 using SFML.Window;
 using SFML.Graphics;
+using SFML.System;
 
 namespace thrii
 {
 	public class Drawer
 	{
-		Window window;
+		RenderWindow window;
+		Engine engine;
 		
-		public Drawer(uint width, uint height, string name, string iconPath)
+		public Drawer(uint width, uint height, string name, string iconPath, Engine e)
 		{
-			window = new Window(new VideoMode(width, height), name);
+			window = new RenderWindow(new VideoMode(width, height), name);
 			SetIcon(iconPath);
 			window.Closed += OnClosed;
+			engine = e;
 		}
 
 		void SetIcon(string iconPath)
@@ -26,10 +30,17 @@ namespace thrii
 			((Window)sender).Close();
 		}
 
-		public void DrawLoop() {
+		public void Draw(Transformable t) 
+		{
+			window.Draw((Drawable)t);
+		}
+
+		public void DrawLoop() 
+		{
 			while (window.IsOpen)
 			{
 				window.DispatchEvents();
+				engine.Update();
 				window.Display();
 			}
 		}

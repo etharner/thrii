@@ -51,6 +51,12 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Drawer.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="System.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="NodeComponents.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

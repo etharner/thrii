@@ -1,18 +1,18 @@
-﻿using System;
-using SFML.Window;
-
-
-namespace thrii
+﻿namespace thrii
 {
 	public class Game
 	{
+		Engine engine;
+		Settings settings;
+
 		public Game()
 		{
+			settings = new Settings(800, 600, "TRHII", "icon.png");
+			engine = new Engine(settings);
 		}
 
 		public void Start() {
-			var drawer = new Drawer(800, 600, "THRII", "icon.png");
-			drawer.DrawLoop();
+			engine.Start();
 		}
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace thrii
+﻿namespace thrii
 {
 	class MainClass
 	{
