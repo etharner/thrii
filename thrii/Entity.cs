@@ -4,10 +4,12 @@ namespace thrii
 {
 	public class Entity
 	{
+		public Name Name;
 		Dictionary<string, object> componentList;
 
-		public Entity()
+		public Entity(Name name)
 		{
+			Name = name;
 			componentList = new Dictionary<string, object>();
 		}
 
