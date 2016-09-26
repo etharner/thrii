@@ -13,6 +13,7 @@ namespace thrii
 			systemList = new List<System>();
 			var renderSystem = new RenderSystem(this);
 			AddSystem(renderSystem);
+			AddSystem(new InputSystem(this, renderSystem.Drawer.Window));
 
 			nodes = new Dictionary<string, List<Node>>();
 

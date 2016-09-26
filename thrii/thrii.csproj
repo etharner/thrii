@@ -60,8 +60,9 @@
     <Compile Include="Spawner.cs" />
     <Compile Include="Colors.cs" />
     <Compile Include="RenderSystem.cs" />
-    <Compile Include="Input.cs" />
+    <Compile Include="InputSystem.cs" />
     <Compile Include="Layout.cs" />
+    <Compile Include="Registrator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

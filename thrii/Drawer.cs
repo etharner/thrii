@@ -6,23 +6,21 @@ namespace thrii
 {
 	public class Drawer
 	{
-		RenderWindow window;
-		Input input;
+		public RenderWindow Window { get; set; }
 		Engine engine;
 		
 		public Drawer(uint width, uint height, string name, string iconPath, Engine e)
 		{
-			window = new RenderWindow(new VideoMode(width, height), name);
+			Window = new RenderWindow(new VideoMode(width, height), name);
 			SetIcon(iconPath);
-			window.Closed += OnClosed;
-			input = new Input(e, window);
+			Window.Closed += OnClosed;
 			engine = e;
 		}
 
 		void SetIcon(string iconPath)
 		{
 			var icon = new Image(iconPath);
-			window.SetIcon(32, 32, icon.Pixels);
+			Window.SetIcon(32, 32, icon.Pixels);
 		}
 
 		static void OnClosed(object sender, EventArgs e)
@@ -32,17 +30,16 @@ namespace thrii
 
 		public void Draw(Transformable t) 
 		{
-			window.Draw((Drawable)t);
+			Window.Draw((Drawable)t);
 		}
 
 		public void DrawLoop() 
 		{
-			while (window.IsOpen)
+			while (Window.IsOpen)
 			{
-				window.DispatchEvents();
-				input.CheckInput();
+				Window.DispatchEvents();
 				engine.Update();
-				window.Display();
+				Window.Display();
 			}
 		}
 	}
