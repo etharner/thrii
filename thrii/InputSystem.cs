@@ -1,21 +1,37 @@
-﻿using SFML.Window;
+﻿using System.Collections.Generic;
+using SFML.Window;
 using SFML.System;
 
 namespace thrii
 {
-	public class Input
+	public class InputSystem : System
 	{
-		Engine engine;
 		Window window;
 
-		public Input(Engine e, Window w) 
+		public InputSystem(Engine e, Window w) : base(e)
 		{
+			nodeType = "CollisionNode";
 			engine = e;
 			window = w;
 		}
 
-		public void CheckInput()
+		bool CheckMenuItemPressed(Vector2i pos)
 		{
+			foreach (CollisionNode target in targets)
+			{
+				if (target.Collision.boundingBox.Contains(pos.X, pos.Y) && 
+				    target.Entity.Name.BaseName == BaseNames.MenuNewGameBackground)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public override void Update() 
+		{
+			GetNodes();
 			if (Mouse.IsButtonPressed(Mouse.Button.Left))
 			{
 				Vector2i pos = Mouse.GetPosition(window);
@@ -25,19 +41,6 @@ namespace thrii
 					engine.SwitchScene(new SessionScene());
 				}
 			}
-		}
-
-		bool CheckMenuItemPressed(Vector2i pos)
-		{
-			if (pos.X >= Layout.MenuNewGameX && pos.X <= Layout.MenuNewGameX + Layout.MenuNewGameWidth)
-			{
-				if (pos.Y >= Layout.MenuNewGameY && pos.Y <= Layout.MenuNewGameY + Layout.MenuNewGameHeight)
-				{
-					return true;
-				}
-			}
-
-			return false;
 		}
 	}
 }
