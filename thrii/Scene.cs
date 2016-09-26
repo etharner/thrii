@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFML.Graphics;
 
 namespace thrii
@@ -46,9 +47,28 @@ namespace thrii
 		{
 			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor));
 			EntityList.Add(Spawner.CreateBackground(
-				Settings.Width - Layout.SessionBackgroundMargin * 2, Settings.Height - Layout.SessionBackgroundMargin * 2, 
-				Layout.SessionBackgroundMargin, Layout.SessionBackgroundMargin, Color.Transparent, 2, Color.White
+				Layout.SessionBackgroundWidth,
+				Layout.SessionBackgroundHeight, 
+				Layout.SessionBackgroundX,
+				Layout.SessionBackgroundY, 
+				Color.Transparent, 2, 
+				Color.White
 			));
+
+
+			var rnd = new Random();
+			for (uint i = 0; i < Settings.GameSize; i++)
+			{
+				for (uint j = 0; j < Settings.GameSize; j++)
+				{
+					Shape gem = new GemView((Gems)Enum.GetValues(typeof(Gems)).GetValue(rnd.Next(0, 5))).GemShape;
+					EntityList.Add(Spawner.CreateGem(
+						gem, 
+						Layout.SessionBackgroundX + Layout.GemMargin + Layout.GemDistance * i, 
+						Layout.SessionBackgroundY + Layout.GemMargin + Layout.GemDistance * j
+					));
+				}
+			}
 		}
 	}
 }

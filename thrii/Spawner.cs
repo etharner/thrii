@@ -46,7 +46,7 @@ namespace thrii
 			var textEntity = new Entity(textName == null ? Registrator.GenerateName(BaseNames.Text) : textName);
 
 			var tDisplayComponent = new DisplayComponent();
-			var text = new Text(textString, new Font("helvetica.otf"));
+			var text = new Text(textString, new Font("helvetica.otf"), Settings.Height / 20);
 			tDisplayComponent.DisplayObject = text;
 			textEntity.AddComponent(tDisplayComponent);
 
@@ -70,6 +70,25 @@ namespace thrii
 				Registrator.GenerateName(BaseNames.MenuNewGameBackground), 
 				Registrator.GenerateName(BaseNames.MenuNewGameText)
 			);
+		}
+
+		public static Entity CreateGem(
+			Shape gem, uint x, uint y
+		)
+		{
+			var gemEntity = new Entity(Registrator.GenerateName(BaseNames.Gem));
+
+			var gDisplayComponent = new DisplayComponent();
+			gDisplayComponent.DisplayObject = gem;
+
+			var gPositionComponent = new PositionComponent();
+			gPositionComponent.X = x;
+			gPositionComponent.Y = y;
+
+			gemEntity.AddComponent(gDisplayComponent);
+			gemEntity.AddComponent(gPositionComponent);
+
+			return gemEntity;
 		}
 
 	}

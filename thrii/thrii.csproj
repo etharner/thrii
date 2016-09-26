@@ -63,6 +63,7 @@
     <Compile Include="InputSystem.cs" />
     <Compile Include="Layout.cs" />
     <Compile Include="Registrator.cs" />
+    <Compile Include="GemView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
