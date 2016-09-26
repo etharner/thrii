@@ -39,6 +39,11 @@ namespace thrii
 			}
 		}
 
+		void RemoveNode(Node node, string nodeClass)
+		{
+			nodes[nodeClass].Remove(node);
+		}
+
 		void AddEntity(Entity entity)
 		{
 			foreach (var nodeClass in NodeComponents.Relations.Keys)
@@ -61,6 +66,20 @@ namespace thrii
 				{
 					((Node)currentNode).Entity = entity;
 					AddNode((Node)currentNode);
+				}
+			}
+		}
+
+		void RemoveEntity(Name entityName)
+		{
+			foreach (var nodeClass in nodes.Keys)
+			{
+				foreach (var node in nodes[nodeClass])
+				{
+					if (node.Entity.Name == entityName)
+					{
+						RemoveNode(node, nodeClass);
+					}
 				}
 			}
 		}
