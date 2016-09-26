@@ -26,8 +26,12 @@ namespace thrii
 			bgPositionComponent.X = x;
 			bgPositionComponent.Y = y;
 
+			var bgCollisionComponent = new CollisionComponent();
+			bgCollisionComponent.boundingBox = new FloatRect(x, y, width, height);
+
 			background.AddComponent(bgDisplayComponent);
 			background.AddComponent(bgPositionComponent);
+			background.AddComponent(bgCollisionComponent);
 
 			return background;
 		}
