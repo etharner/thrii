@@ -25,7 +25,7 @@ namespace thrii
 
 	public static class Registrator
 	{
-		static Dictionary<BaseNames, int> registered;
+		static Dictionary<BaseNames, int> registered = new Dictionary<BaseNames, int>();
 
 		public static Name GenerateName(BaseNames name)
 		{
