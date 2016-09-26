@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace thrii
+﻿namespace thrii
 {
 	public class Node
 	{
-		public Entity Entity { get; set; }
+		public Entity Entity;
 	}
 
 	public class RenderNode : Node
