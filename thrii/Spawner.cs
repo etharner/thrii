@@ -6,10 +6,11 @@ namespace thrii
 	public static class Spawner
 	{
 		public static Entity CreateBackground(
-			uint width, uint height, uint x, uint y, Color color, int outline = 0, Color outlineColor = new Color()
+			uint width, uint height, uint x, uint y, Color color, int outline = 0, 
+			Color outlineColor = new Color(), Name name = null
 		)
 		{
-			var background = new Entity();
+			var background = new Entity(name == null ? Registrator.GenerateName(BaseNames.Background) : name);
 
 			var bgDisplayComponent = new DisplayComponent();
 			var bgShape = new RectangleShape(new SFML.System.Vector2f(width, height));
@@ -31,11 +32,14 @@ namespace thrii
 			return background;
 		}
 
-		public static List<Entity> CreateTextFrame(uint width, uint height, uint x, uint y, uint textX, uint textY, string textString)
+		public static List<Entity> CreateTextFrame(
+			uint width, uint height, uint x, uint y, uint textX, uint textY, string textString,
+			Name bgName = null, Name textName = null
+		)
 		{
 			var textFrame = new List<Entity>();
 
-			var textEntity = new Entity();
+			var textEntity = new Entity(textName == null ? Registrator.GenerateName(BaseNames.Text) : textName);
 
 			var tDisplayComponent = new DisplayComponent();
 			var text = new Text(textString, new Font("helvetica.otf"));
@@ -47,10 +51,22 @@ namespace thrii
 			tPositionComponent.Y = textY;
 			textEntity.AddComponent(tPositionComponent);
 
-			textFrame.Add(CreateBackground(width, height, x, y, Color.Transparent, 2, Color.White));
+			textFrame.Add(CreateBackground(width, height, x, y, Color.Transparent, 2, Color.White, bgName));
 			textFrame.Add(textEntity);
 
 			return textFrame;
 		}
+
+		public static List<Entity> CreateMenuEntry(
+			uint width, uint height, uint x, uint y, uint textX, uint textY, string textString
+		)
+		{
+			return CreateTextFrame(
+				width, height, x, y, textX, textY, textString, 
+				Registrator.GenerateName(BaseNames.MenuNewGameBackground), 
+				Registrator.GenerateName(BaseNames.MenuNewGameText)
+			);
+		}
+
 	}
 }

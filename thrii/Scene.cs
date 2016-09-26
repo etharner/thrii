@@ -29,7 +29,7 @@ namespace thrii
 		{
 			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor));
 
-			var textFrame = Spawner.CreateTextFrame(
+			var textFrame = Spawner.CreateMenuEntry(
 				Layout.MenuNewGameWidth, Layout.MenuNewGameHeight, Layout.MenuNewGameX, Layout.MenuNewGameY, 
 				Layout.MenuNewGameTextX, Layout.MenuNewGameTextY, "New Game"
 			);

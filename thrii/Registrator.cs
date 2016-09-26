@@ -4,9 +4,11 @@ namespace thrii
 {
 	public enum BaseNames
 	{
-		MenuNewGameBg,
+		MenuNewGameBackground,
 		MenuNewGameText,
-		SessionBg
+		Background,
+		Text,
+		SessionBackground,
 	}
 
 	public class Name
@@ -21,16 +23,11 @@ namespace thrii
 		}
 	}
 
-	public class Registrator
+	public static class Registrator
 	{
-		Dictionary<BaseNames, int> registered;
+		static Dictionary<BaseNames, int> registered;
 
-		public Registrator()
-		{
-			registered = new Dictionary<BaseNames, int>();
-		}
-
-		public Name GenerateName(BaseNames name)
+		public static Name GenerateName(BaseNames name)
 		{
 			if (!registered.ContainsKey(name))
 			{
@@ -43,7 +40,7 @@ namespace thrii
 			return new Name(name, registered[name]);
 		}
 
-		public void RemoveName(BaseNames name)
+		public static void RemoveName(BaseNames name)
 		{
 			registered[name]--;
 			if (registered[name] == 0)
