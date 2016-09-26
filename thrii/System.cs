@@ -4,15 +4,22 @@ namespace thrii
 {
 	public class System
 	{
-		readonly string NodeType;
-		List<Node> targets;
-		Engine engine;
+		protected string nodeType;
+		protected List<Node> targets;
+		protected Engine engine;
+
+		protected System(Engine e)
+		{
+			nodeType = "";
+			targets = new List<Node>();
+			engine = e;
+		}
 
 		protected void GetNodes()
 		{
-			engine.GetNodeList(NodeType);
+			targets = engine.GetNodeList(nodeType);
 		}
 
-		public void Update() {}
+		public virtual void Update() {}
 	}
 }

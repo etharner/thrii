@@ -2,38 +2,29 @@
 
 namespace thrii
 {
-	public class RenderSystem : ISystem
+	public class RenderSystem : System
 	{
-		public string NodeType { get; }
-		List<Node> targets;
-		Drawer drawer;
-		Engine engine;
+		public Drawer Drawer { get; set; }
 
-		public RenderSystem(Engine e)
+		public RenderSystem(Engine e) : base(e)
 		{
-			NodeType = "RenderNode";
-			drawer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath, e);
-			engine = e;
-		}
-
-		public void GetNodes()
-		{
-			targets = engine.GetNodeList(NodeType);
+			nodeType = "RenderNode";
+			Drawer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath, e);
 		}
 
 		public void Render()
 		{
-			drawer.DrawLoop();	
+			Drawer.DrawLoop();	
 		}
 
-		public void Update() 
+		public override void Update() 
 		{
 			GetNodes();
-			foreach (var target in targets)
+			foreach (RenderNode target in targets)
 			{
-				var renderTarget = ((RenderNode)target);
+				var renderTarget = target;
 				renderTarget.Display.DisplayObject.Position = new SFML.System.Vector2f(renderTarget.Position.X, renderTarget.Position.Y);
-				drawer.Draw(renderTarget.Display.DisplayObject);
+				Drawer.Draw(renderTarget.Display.DisplayObject);
 			}
 		}
 	}
