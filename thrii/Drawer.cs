@@ -11,7 +11,10 @@ namespace thrii
 		
 		public Drawer(uint width, uint height, string name, string iconPath, Engine e)
 		{
-			Window = new RenderWindow(new VideoMode(width, height), name);
+			var windowSettings = new ContextSettings();
+			windowSettings.AntialiasingLevel = 8;
+
+			Window = new RenderWindow(new VideoMode(width, height), name,Styles.Default, windowSettings);
 			SetIcon(iconPath);
 			Window.Closed += OnClosed;
 			engine = e;
