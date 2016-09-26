@@ -1,10 +1,18 @@
-﻿namespace thrii
-{
-	interface ISystem
-	{
-		string NodeType { get; }
+﻿using System.Collections.Generic;
 
-		void GetNodes();
-		void Update();	
+namespace thrii
+{
+	public class System
+	{
+		readonly string NodeType;
+		List<Node> targets;
+		Engine engine;
+
+		protected void GetNodes()
+		{
+			engine.GetNodeList(NodeType);
+		}
+
+		public void Update() {}
 	}
 }
