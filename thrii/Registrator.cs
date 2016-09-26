@@ -9,6 +9,7 @@ namespace thrii
 		Background,
 		Text,
 		SessionBackground,
+		Gem
 	}
 
 	public class Name
