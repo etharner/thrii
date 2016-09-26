@@ -12,7 +12,13 @@ namespace thrii
 						new KeyValuePair<string, string>("DisplayComponent", "Display"),
 						new KeyValuePair<string, string>("PositionComponent", "Position")
 					}
+				},
+				{ "CollisionNode", new List<KeyValuePair<string, string>>() 
+					{ 
+						new KeyValuePair<string, string>("CollisionComponent", "Collision"),
+					}
 				}
+
 			};
 	}
 }

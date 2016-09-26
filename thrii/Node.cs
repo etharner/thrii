@@ -10,4 +10,9 @@
 		public DisplayComponent Display;
 		public PositionComponent Position;
 	}
+
+	public class CollisionNode : Node
+	{
+		public CollisionComponent Collision;
+	}
 }
