@@ -5,12 +5,12 @@ namespace thrii
 {
 	public class Engine
 	{
-		List<ISystem> systemList;
+		List<System> systemList;
 		Dictionary<string, List<Node>> nodes;
 
 		public Engine()
 		{
-			systemList = new List<ISystem>();
+			systemList = new List<System>();
 			var renderSystem = new RenderSystem(this);
 			AddSystem(renderSystem);
 
@@ -21,7 +21,7 @@ namespace thrii
 			renderSystem.Render();
 		}
 
-		void AddSystem(ISystem system)
+		void AddSystem(System system)
 		{
 			systemList.Add(system);
 		}
@@ -59,6 +59,7 @@ namespace thrii
 
 				if (fullNode)
 				{
+					((Node)currentNode).Entity = entity;
 					AddNode((Node)currentNode);
 				}
 			}
@@ -85,7 +86,7 @@ namespace thrii
 
 		public void Update() 
 		{
-			foreach (ISystem s in systemList)
+			foreach (System s in systemList)
 			{
 				s.Update();
 			}
