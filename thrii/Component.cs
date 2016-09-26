@@ -4,12 +4,17 @@ namespace thrii
 {
 	public class PositionComponent
 	{
-		public uint X { get; set; }
-		public uint Y { get; set; }
+		public uint X;
+		public uint Y;
 	}
 
 	public class DisplayComponent
 	{
-		public Transformable DisplayObject { get; set; }
+		public Transformable DisplayObject;
+	}
+
+	public class CollisionComponent
+	{
+		public FloatRect boundingBox;
 	}
 }
