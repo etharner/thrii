@@ -6,6 +6,8 @@ namespace thrii
 	{
 		MenuNewGameBackground,
 		MenuNewGameText,
+		MenuSettingsBackground,
+		MenuSettingsText,
 		Background,
 		Text,
 		SessionBackground,
