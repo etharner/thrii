@@ -4,8 +4,10 @@ namespace thrii
 {
 	public enum BaseNames
 	{
+		MenuNewGame,
 		MenuNewGameBackground,
 		MenuNewGameText,
+		MenuSettings,
 		MenuSettingsBackground,
 		MenuSettingsText,
 		Background,
