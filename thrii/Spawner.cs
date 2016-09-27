@@ -62,29 +62,33 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateMenuEntry(
-			BaseNames entryBackgroundName, BaseNames entryTextName
+			BaseNames entryName
 		)
 		{
-			switch (entryBackgroundName)
+			switch (entryName)
 			{
-				case BaseNames.MenuNewGameBackground:
+				case BaseNames.MenuNewGame:
 					return CreateTextFrame(
 						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
 						Layout.MenuNewGameX, Layout.MenuNewGameY, 
 						Layout.MenuNewGameTextX, Layout.MenuNewGameTextY, "New Game", 
-						Registrator.GenerateName(entryBackgroundName), 
-						Registrator.GenerateName(entryTextName)
+						Registrator.GenerateName(BaseNames.MenuNewGameBackground), 
+						Registrator.GenerateName(BaseNames.MenuNewGameText)
 					);
 				default:
 					return CreateTextFrame(
 						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
 						Layout.MenuSettingsX, Layout.MenuSettingsY, 
 						Layout.MenuSettingsTextX, Layout.MenuSettingsTextY, "Settings", 
-						Registrator.GenerateName(entryBackgroundName), 
-						Registrator.GenerateName(entryTextName)
+						Registrator.GenerateName(BaseNames.MenuSettingsBackground), 
+						Registrator.GenerateName(BaseNames.MenuSettingsText)
 					);	
 			}
 		}
+
+		public static List<Entity> CreateOptionEntry(
+			BaseNames optionBack
+		)
 
 		public static Entity CreateGem(
 			Shape gem, uint x, uint y

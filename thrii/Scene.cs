@@ -30,12 +30,9 @@ namespace thrii
 		{
 			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor));
 
-			var newGameMenuEntry = Spawner.CreateMenuEntry(
-				BaseNames.MenuNewGameBackground, BaseNames.MenuNewGameText
-			);
-			var SettingsMenuEntry = Spawner.CreateMenuEntry(
-				BaseNames.MenuSettingsBackground, BaseNames.MenuSettingsText
-			);
+			var newGameMenuEntry = Spawner.CreateMenuEntry(BaseNames.MenuNewGame);
+			var SettingsMenuEntry = Spawner.CreateMenuEntry(BaseNames.MenuSettings);
+
 			newGameMenuEntry.AddRange(SettingsMenuEntry);
 			foreach (var entity in newGameMenuEntry)
 			{
