@@ -62,14 +62,28 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateMenuEntry(
-			uint width, uint height, uint x, uint y, uint textX, uint textY, string textString
+			BaseNames entryBackgroundName, BaseNames entryTextName
 		)
 		{
-			return CreateTextFrame(
-				width, height, x, y, textX, textY, textString, 
-				Registrator.GenerateName(BaseNames.MenuNewGameBackground), 
-				Registrator.GenerateName(BaseNames.MenuNewGameText)
-			);
+			switch (entryBackgroundName)
+			{
+				case BaseNames.MenuNewGameBackground:
+					return CreateTextFrame(
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuNewGameX, Layout.MenuNewGameY, 
+						Layout.MenuNewGameTextX, Layout.MenuNewGameTextY, "New Game", 
+						Registrator.GenerateName(entryBackgroundName), 
+						Registrator.GenerateName(entryTextName)
+					);
+				default:
+					return CreateTextFrame(
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuSettingsX, Layout.MenuSettingsY, 
+						Layout.MenuSettingsTextX, Layout.MenuSettingsTextY, "Settings", 
+						Registrator.GenerateName(entryBackgroundName), 
+						Registrator.GenerateName(entryTextName)
+					);	
+			}
 		}
 
 		public static Entity CreateGem(
