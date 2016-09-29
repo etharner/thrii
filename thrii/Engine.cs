@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SFML.Window;
 
 namespace thrii
 {
@@ -7,24 +8,33 @@ namespace thrii
 	{
 		List<System> systemList;
 		Dictionary<string, List<Node>> nodes;
+		public List<Name> LastClicked { get; set; }
+		public Drawer Renderer;
 
 		public Engine()
 		{
-			systemList = new List<System>();
+			Renderer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath);
+
+			systemList = new List<System>(Enum.GetNames(typeof(SystemPriority)).Length);
+
 			var renderSystem = new RenderSystem(this);
-			AddSystem(renderSystem);
-			AddSystem(new InputSystem(this, renderSystem.Drawer.Window));
+			AddSystem(new InputSystem(this), SystemPriority.Input);
+			AddSystem(new InterfaceSystem(this), SystemPriority.Interface);
+			AddSystem(new SceneSystem(this), SystemPriority.Scene);
+			AddSystem(renderSystem, SystemPriority.Render);
 
 			nodes = new Dictionary<string, List<Node>>();
 
+			LastClicked = new List<Name>();
+
 			SwitchScene(new MenuScene());
 
-			renderSystem.Render();
+			Start();
 		}
 
-		void AddSystem(System system)
+		void AddSystem(System system, SystemPriority priority)
 		{
-			systemList.Add(system);
+			systemList.Insert((int)priority, system);
 		}
 
 		void AddNode(Node node)
@@ -96,12 +106,32 @@ namespace thrii
 
 		public List<Node> GetNodeList(string nodeClass)
 		{
-			return nodes[nodeClass];
+			if (nodes.ContainsKey(nodeClass))
+			{
+				return nodes[nodeClass];
+			}
+
+			return new List<Node>();
+		}
+
+		public bool CheckClicked(BaseNames name)
+		{
+			return LastClicked.Exists(n => n.BaseName == name);
 		}
 
 		public void Start()
 		{
-			//Update();
+			while (Renderer.Window.IsOpen)
+			{
+				Renderer.Window.DispatchEvents();
+				Update();
+				Renderer.Window.Display();
+			}
+		}
+
+		public void Stop()
+		{
+			Renderer.Window.Close();
 		}
 
 		public void Update() 
