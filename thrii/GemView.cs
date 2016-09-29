@@ -15,7 +15,7 @@ namespace thrii
 	{
 		public Shape GemShape { get; set; }
 
-		public GemView(Gems gemType)
+		public GemView(Gems gemType, Layout layout)
 		{
 			uint cornerCount;
 			Color color;
@@ -44,8 +44,7 @@ namespace thrii
 					break;
 			}
 
-
-			GemShape = cornerCount == 0 ? new CircleShape(Layout.GemSize) : new CircleShape(Layout.GemSize, cornerCount);
+			GemShape = cornerCount == 0 ? new CircleShape(layout.GemSize) : new CircleShape(layout.GemSize, cornerCount);
 			GemShape.FillColor = color;
 		}
 	}
