@@ -6,6 +6,7 @@ namespace thrii
 	{
 		public uint X;
 		public uint Y;
+		public float Rotation;
 	}
 
 	public class DisplayComponent
@@ -15,6 +16,11 @@ namespace thrii
 
 	public class CollisionComponent
 	{
-		public FloatRect boundingBox;
+		public FloatRect BoundingBox;
+	}
+
+	public class InterfaceComponent
+	{
+		public string Text;
 	}
 }
