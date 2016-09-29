@@ -10,15 +10,19 @@ namespace thrii
 				{ "RenderNode", new List<KeyValuePair<string, string>>() 
 					{ 
 						new KeyValuePair<string, string>("DisplayComponent", "Display"),
-						new KeyValuePair<string, string>("PositionComponent", "Position")
+						new KeyValuePair<string, string>("PositionComponent", "Position"),
 					}
 				},
 				{ "CollisionNode", new List<KeyValuePair<string, string>>() 
 					{ 
 						new KeyValuePair<string, string>("CollisionComponent", "Collision"),
 					}
+				},
+				{ "InterfaceNode", new List<KeyValuePair<string, string>>() 
+					{ 
+						new KeyValuePair<string, string>("InterfaceComponent", "Interface"),
+					}
 				}
-
 			};
 	}
 }
