@@ -1,30 +1,46 @@
 ﻿using System.Collections.Generic;
+using SFML.Graphics;
 
 namespace thrii
 {
 	public class RenderSystem : System
 	{
-		public Drawer Drawer { get; set; }
+		List<Node> interfaceNodes;
+		List<Node> renderNodes;
 
 		public RenderSystem(Engine e) : base(e)
 		{
-			nodeType = "RenderNode";
-			Drawer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath, e);
+			interfaceNodes = new List<Node>();
+			renderNodes = new List<Node>();
 		}
 
-		public void Render()
+		protected override void GetNodes()
 		{
-			Drawer.DrawLoop();	
+			interfaceNodes = engine.GetNodeList("InterfaceNode");
+			renderNodes = engine.GetNodeList("RenderNode");
 		}
 
 		public override void Update() 
 		{
 			GetNodes();
-			foreach (RenderNode target in targets)
+
+			var interfaceTargets = new Dictionary<Name, string>();
+
+			foreach (InterfaceNode target in interfaceNodes)
 			{
-				var renderTarget = target;
-				renderTarget.Display.DisplayObject.Position = new SFML.System.Vector2f(renderTarget.Position.X, renderTarget.Position.Y);
-				Drawer.Draw(renderTarget.Display.DisplayObject);
+				interfaceTargets.Add(target.Entity.Name, target.Interface.Text);
+			}
+
+			foreach (RenderNode target in renderNodes)
+			{
+				target.Display.DisplayObject.Position = new SFML.System.Vector2f(target.Position.X, target.Position.Y);
+				target.Display.DisplayObject.Rotation = target.Position.Rotation;
+				if (interfaceTargets.ContainsKey(target.Entity.Name))
+				{
+					((Text)target.Display.DisplayObject).DisplayedString = interfaceTargets[target.Entity.Name];
+				}
+
+				engine.Renderer.Draw(target.Display.DisplayObject);
 			}
 		}
 	}
