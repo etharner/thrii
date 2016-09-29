@@ -69,6 +69,8 @@
     <Compile Include="SystemPriority.cs" />
     <Compile Include="SceneSystem.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="GemSystem.cs" />
+    <Compile Include="AnimationSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
