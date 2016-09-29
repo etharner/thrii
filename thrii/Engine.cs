@@ -11,6 +11,7 @@ namespace thrii
 		public List<Name> LastClicked { get; set; }
 		public Drawer Renderer;
 		public Clock Clock;
+		public GameState gameState;
 
 		public Engine()
 		{
@@ -26,6 +27,8 @@ namespace thrii
 			nodes = new Dictionary<string, List<Node>>();
 
 			LastClicked = new List<Name>();
+
+			gameState = GameState.MENU;
 
 			SwitchScene(new MenuScene());
 
