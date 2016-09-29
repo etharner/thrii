@@ -5,10 +5,12 @@ namespace thrii
 	public class InterfaceSystem : System
 	{
 		List<Node> interfaceNodes;
+		int currentScore;
 
 		public InterfaceSystem(Engine e) : base(e)
 		{
 			interfaceNodes = new List<Node>();
+			currentScore = 0;
 		}
 
 		protected override void GetNodes()
@@ -63,6 +65,27 @@ namespace thrii
 						Settings.SwitchGameSize(Settings.GameSizeIndex + 1);
 						target.Interface.Text = Settings.GameSize.ToString();
 					}
+				}
+
+				if (target.Entity.Name.BaseName == BaseNames.HudTimeText)
+				{
+					var time = (int)(5 - engine.Clock.ElapsedTime.AsSeconds());
+					target.Interface.Text = time.ToString();
+					if (time == 0)
+					{
+						engine.NeedSwitchScene = true;
+						engine.GameState = GameState.GAME_OVER;
+					}
+				}
+
+				if (target.Entity.Name.BaseName == BaseNames.HudScoreText)
+				{
+					target.Interface.Text = currentScore.ToString();
+				}
+
+				if (target.Entity.Name.BaseName == BaseNames.MenuScore)
+				{
+					target.Interface.Text = "Score: " + currentScore;
 				}
 			}
 		}
