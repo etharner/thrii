@@ -29,7 +29,7 @@
 				engine.LastClicked.Clear();
 
 				engine.SwitchScene(new SessionScene());
-				engine.Clock = new SFML.System.Clock();
+				engine.SessionClock = new SFML.System.Clock();
 			}
 
 			if (engine.CheckClicked(BaseNames.MenuSettingsBackground))
@@ -52,6 +52,7 @@
 				var oldWindow = engine.Renderer.Window;
 				engine.Renderer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath);
 				oldWindow.Close();
+				engine.ResetSystems();
 
 				engine.SwitchScene(new MenuScene());
 			}

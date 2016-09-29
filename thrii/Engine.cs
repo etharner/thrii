@@ -10,7 +10,9 @@ namespace thrii
 		Dictionary<string, List<Node>> nodes;
 		public List<Name> LastClicked { get; set; }
 		public Drawer Renderer;
-		public Clock Clock;
+		public Clock GlobalClock;
+		public Clock SessionClock;
+		public float Time;
 		public GameState GameState;
 		public bool NeedSwitchScene;
 
@@ -18,16 +20,13 @@ namespace thrii
 		{
 			Renderer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath);
 
-			systemList = new List<System>(Enum.GetNames(typeof(SystemPriority)).Length);
-
-			AddSystem(new InputSystem(this), SystemPriority.Input);
-			AddSystem(new InterfaceSystem(this), SystemPriority.Interface);
-			AddSystem(new SceneSystem(this), SystemPriority.Scene);
-			AddSystem(new RenderSystem(this), SystemPriority.Render);
+			ResetSystems();
 
 			nodes = new Dictionary<string, List<Node>>();
 
 			LastClicked = new List<Name>();
+
+			GlobalClock = new Clock();
 
 			GameState = GameState.MENU;
 
@@ -99,6 +98,17 @@ namespace thrii
 			}
 		}
 
+		public void ResetSystems() {
+			systemList = new List<System>(Enum.GetNames(typeof(SystemPriority)).Length);
+
+			AddSystem(new InputSystem(this), SystemPriority.Input);
+			AddSystem(new InterfaceSystem(this), SystemPriority.Interface);
+			AddSystem(new SceneSystem(this), SystemPriority.Scene);
+			AddSystem(new GemSystem(this), SystemPriority.Gem);
+			AddSystem(new AnimationSystem(this), SystemPriority.Animation);
+			AddSystem(new RenderSystem(this), SystemPriority.Render);
+		}
+
 		public void SwitchScene(Scene scene) 
 		{
 			nodes.Clear();
@@ -119,9 +129,14 @@ namespace thrii
 			return new List<Node>();
 		}
 
-		public bool CheckClicked(BaseNames name)
+		public bool CheckClicked(BaseNames baseName)
 		{
-			return LastClicked.Exists(n => n.BaseName == name);
+			return LastClicked.Exists(n => n.BaseName == baseName);
+		}
+
+		public bool CheckClicked(Name name)
+		{
+			return LastClicked.Exists(n => n == name);
 		}
 
 		public void Start()
@@ -129,6 +144,10 @@ namespace thrii
 			while (Renderer.Window.IsOpen)
 			{
 				Renderer.Window.DispatchEvents();
+
+				Time = GlobalClock.ElapsedTime.AsMicroseconds() / 500;
+				GlobalClock.Restart();
+
 				Update();
 				Renderer.Window.Display();
 			}
