@@ -38,9 +38,16 @@ namespace thrii
 		MenuBackBackground,
 		MenuBackText,
 
+		SessionBackground,
+
+		HudScore,
+		HudScoreText,
+
+		HudTime,
+		HudTimeText,
+
 		Background,
 		Text,
-		SessionBackground,
 		Gem
 	}
 

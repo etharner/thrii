@@ -46,38 +46,6 @@ namespace thrii
 		}
 	}
 
-	public class SessionScene : Scene
-	{
-		public SessionScene()
-		{
-			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
-			EntityList.Add(Spawner.CreateBackground(
-				layout,
-				layout.SessionBackgroundWidth,
-				layout.SessionBackgroundHeight, 
-				layout.SessionBackgroundX,
-				layout.SessionBackgroundY, 
-				Color.Transparent, true, 2, 
-				Color.White
-			));
-
-
-			var rnd = new Random();
-			for (uint i = 0; i < Settings.GameSize; i++)
-			{
-				for (uint j = 0; j < Settings.GameSize; j++)
-				{
-					Shape gem = new GemView((Gems)Enum.GetValues(typeof(Gems)).GetValue(rnd.Next(0, 5)), layout).GemShape;
-					EntityList.Add(Spawner.CreateGem(
-						gem, 
-						layout.SessionBackgroundX + layout.GemMargin + layout.GemDistance * i, 
-						layout.SessionBackgroundY + layout.GemMargin + layout.GemDistance * j
-					));
-				}
-			}
-		}
-	}
-
 	public class SettingsScene : Scene
 	{
 		public SettingsScene()
@@ -97,6 +65,40 @@ namespace thrii
 			foreach (var entity in resolutionMenuOptionEntry)
 			{
 				EntityList.Add(entity);
+			}
+		}
+	}
+
+	public class SessionScene : Scene
+	{
+		public SessionScene()
+		{
+			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+			EntityList.Add(Spawner.CreateBackground(
+				layout,
+				layout.SessionBackgroundWidth,
+				layout.SessionBackgroundHeight, 
+				layout.SessionBackgroundX,
+				layout.SessionBackgroundY, 
+				Color.Transparent, true, 2, 
+				Color.White
+			));
+			EntityList.AddRange(Spawner.CreateHud(layout, BaseNames.HudTime));
+			EntityList.AddRange(Spawner.CreateHud(layout, BaseNames.HudScore));
+
+
+			var rnd = new Random();
+			for (uint i = 0; i < Settings.GameSize; i++)
+			{
+				for (uint j = 0; j < Settings.GameSize; j++)
+				{
+					Shape gem = new GemView((Gems)Enum.GetValues(typeof(Gems)).GetValue(rnd.Next(0, 5)), layout).GemShape;
+					EntityList.Add(Spawner.CreateGem(
+						gem, 
+						layout.SessionBackgroundX + layout.GemMargin + layout.GemDistance * i, 
+						layout.SessionBackgroundY + layout.GemMargin + layout.GemDistance * j
+					));
+				}
 			}
 		}
 	}

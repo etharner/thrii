@@ -70,6 +70,24 @@
 		public uint SessionBackgroundX;
 		public uint SessionBackgroundY;
 
+		public uint HudTimeWidth;
+		public uint HudTimeHeight;
+		public uint HudTimeX;
+		public uint HudTimeY;
+		public uint HudTimeTextX;
+		public uint HudTimeTextY;
+		public uint HudTimeLabelX;
+		public uint HudTimeLabelY;
+
+		public uint HudScoreWidth;
+		public uint HudScoreHeight;
+		public uint HudScoreX;
+		public uint HudScoreY;
+		public uint HudScoreTextX;
+		public uint HudScoreTextY;
+		public uint HudScoreLabelX;
+		public uint HudScoreLabelY;
+
 		public uint GemMargin;
 		public uint GemSize;
 		public uint GemDistance;
@@ -143,6 +161,24 @@
 			SessionBackgroundHeight = SessionBackgroundWidth;
 			SessionBackgroundX = (Settings.Width - SessionBackgroundWidth) / 2;
 			SessionBackgroundY = Settings.Height / 20;
+
+			HudTimeWidth = MenuEntryWidth / 2;
+			HudTimeHeight = MenuEntryHeight;
+			HudTimeX = Settings.Width / 100;
+			HudTimeY = SessionBackgroundY + MenuEntryHeight;
+			HudTimeTextX = HudTimeX + FontSize;
+			HudTimeTextY = HudTimeY + FontSize / 6;
+			HudTimeLabelX = HudTimeX + FontSize / 2;
+			HudTimeLabelY = SessionBackgroundY;
+
+			HudScoreWidth = MenuEntryWidth / 2;
+			HudScoreHeight = MenuEntryHeight;
+			HudScoreX = Settings.Width - (Settings.Width - SessionBackgroundWidth - FontSize) / 2;
+			HudScoreY = SessionBackgroundY + MenuEntryHeight;
+			HudScoreTextX = HudScoreX + FontSize + FontSize / 3;
+			HudScoreTextY = HudScoreY + FontSize / 4;
+			HudScoreLabelX = HudScoreX + FontSize / 3;
+			HudScoreLabelY = SessionBackgroundY;
 
 			GemMargin = SessionBackgroundWidth / 50;
 			GemSize = SessionBackgroundWidth / (Settings.GameSize * 2) - GemMargin / Settings.GameSize;

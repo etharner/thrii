@@ -270,6 +270,79 @@ namespace thrii
 			}
 		}
 
+		public static List<Entity> CreateHudFrame(
+			Layout layout, 
+			uint width, uint height, uint x, uint y, uint textX, uint textY, string textString,
+			uint labelX, uint labelY, string labelText,
+			Name bgName = null, Name textName = null
+		)
+		{
+			var hudFrame = new List<Entity>();
+
+			var textLabel = new Entity(Registrator.GenerateName(BaseNames.Text));
+
+			var tlDisplayComponent = new DisplayComponent();
+			var tlText = new Text(labelText, new Font("helvetica.otf"), layout.FontSize);
+			tlDisplayComponent.DisplayObject = tlText;
+
+			var tlPositionComponent = new PositionComponent();
+			tlPositionComponent.X = labelX;
+			tlPositionComponent.Y = labelY;
+
+			textLabel.AddComponent(tlDisplayComponent);
+			textLabel.AddComponent(tlPositionComponent);
+
+			var textFrame = CreateTextFrame(
+				layout, width, height, x, y, textX, textY, textString, bgName, textName
+			);
+
+			hudFrame.Add(textLabel);
+			hudFrame.AddRange(textFrame);
+
+			return hudFrame;
+		}
+
+		public static List<Entity> CreateHud(
+			Layout layout,
+			BaseNames hudName
+		)
+		{
+			switch (hudName) {
+				case BaseNames.HudTime:
+					return CreateHudFrame(
+						layout,
+						layout.HudTimeWidth,
+						layout.HudTimeHeight,
+						layout.HudTimeX,
+						layout.HudTimeY,
+						layout.HudTimeTextX,
+						layout.HudTimeTextY,
+						"60",
+						layout.HudTimeLabelX,
+						layout.HudTimeLabelY,
+						"Time",
+						Registrator.GenerateName(BaseNames.Background),
+						Registrator.GenerateName(BaseNames.HudTimeText)
+					);
+				default:
+				return CreateHudFrame(
+					layout,
+					layout.HudScoreWidth,
+					layout.HudScoreHeight,
+					layout.HudScoreX,
+					layout.HudScoreY,
+					layout.HudScoreTextX,
+					layout.HudScoreTextY,
+					"0",
+					layout.HudScoreLabelX,
+					layout.HudScoreLabelY,
+					"Score",
+					Registrator.GenerateName(BaseNames.Background),
+					Registrator.GenerateName(BaseNames.HudScoreText)
+				);
+			}
+		}
+
 		public static Entity CreateGem(
 			Shape gem, uint x, uint y
 		)
