@@ -64,6 +64,15 @@
 		public uint MenuBackTextX;
 		public uint MenuBackTextY;
 
+		public uint MenuGameOverX;
+		public uint MenuGameOverY;
+
+		public uint MenuScoreX;
+		public uint MenuScoreY;
+
+		public uint MenuExitToMenuTextX;
+		public uint MenuExitToMenuTextY;
+
 		public uint SessionBackgroundMargin;
 		public uint SessionBackgroundWidth;
 		public uint SessionBackgroundHeight;
@@ -155,6 +164,15 @@
 			MenuBackY = MenuApplyY + MenuEntryHeight + MenuEntryHeight / 4;
 			MenuBackTextX = MenuBackX + MenuEntryWidth / 3;
 			MenuBackTextY = MenuBackY;
+
+			MenuGameOverX = MenuNewGameTextX;
+			MenuGameOverY = MenuNewGameY - MenuEntryHeight * 2;
+
+			MenuScoreX = MenuSettingsX + MenuEntryWidth / 6;
+			MenuScoreY = MenuSettingsY - MenuEntryHeight - FontSize * 2;
+
+			MenuExitToMenuTextX = MenuSettingsX + FontSize / 2;
+			MenuExitToMenuTextY = MenuSettingsTextY;
 
 			SessionBackgroundMargin = MenuEntryHeight;
 			SessionBackgroundWidth = Settings.Width -SessionBackgroundMargin * 5;

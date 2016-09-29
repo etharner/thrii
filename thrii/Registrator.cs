@@ -38,6 +38,12 @@ namespace thrii
 		MenuBackBackground,
 		MenuBackText,
 
+		MenuScore,
+
+		MenuExitToMenu,
+		MenuExitToMenuBackground,
+		MenuExitToMenuText,
+
 		SessionBackground,
 
 		HudScore,

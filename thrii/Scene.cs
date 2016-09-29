@@ -33,16 +33,9 @@ namespace thrii
 			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
 			EntityList.Add(Spawner.CreateGameSprite(layout));
 
-			var newGameMenuEntry = Spawner.CreateMenuEntry(layout, BaseNames.MenuNewGame);
-			var settingsMenuEntry = Spawner.CreateMenuEntry(layout, BaseNames.MenuSettings);
-			var exitMenuEntry = Spawner.CreateMenuEntry(layout, BaseNames.MenuExit);
-
-			newGameMenuEntry.AddRange(settingsMenuEntry);
-			newGameMenuEntry.AddRange(exitMenuEntry);
-			foreach (var entity in newGameMenuEntry)
-			{
-				EntityList.Add(entity);
-			}
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuNewGame));
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuSettings));
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuExit));
 		}
 	}
 
@@ -53,19 +46,11 @@ namespace thrii
 			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
 			EntityList.Add(Spawner.CreateGameSprite(layout));
 
-			var resolutionMenuOptionEntry = Spawner.CreateOptionEntry(layout, BaseNames.MenuOptionResolution);
-			var gameSizeMenuOptionEntry = Spawner.CreateOptionEntry(layout, BaseNames.MenuOptionGameSize);
+			EntityList.AddRange(Spawner.CreateOptionEntry(layout, BaseNames.MenuOptionResolution));
+			EntityList.AddRange(Spawner.CreateOptionEntry(layout, BaseNames.MenuOptionGameSize));
 
-			var applyMenuEntry = Spawner.CreateMenuEntry(layout, BaseNames.MenuApply);
-			var backMenuEntry = Spawner.CreateMenuEntry(layout, BaseNames.MenuBack);
-
-			resolutionMenuOptionEntry.AddRange(gameSizeMenuOptionEntry);
-			resolutionMenuOptionEntry.AddRange(applyMenuEntry);
-			resolutionMenuOptionEntry.AddRange(backMenuEntry);
-			foreach (var entity in resolutionMenuOptionEntry)
-			{
-				EntityList.Add(entity);
-			}
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuApply));
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuBack));
 		}
 	}
 
@@ -100,6 +85,23 @@ namespace thrii
 					));
 				}
 			}
+		}
+	}
+
+	public class GameOverScene : Scene
+	{
+		public GameOverScene()
+		{
+			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+			EntityList.Add(Spawner.CreateLabel(
+				layout, layout.MenuGameOverX, layout.MenuGameOverY, "Game Over", BaseNames.Text
+			));
+			EntityList.Add(Spawner.CreateLabel(
+				layout, layout.MenuScoreX, layout.MenuScoreY, "Score: ", BaseNames.MenuScore
+			));
+
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuNewGame));
+			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuExitToMenu));
 		}
 	}
 }

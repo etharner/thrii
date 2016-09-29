@@ -137,6 +137,15 @@ namespace thrii
 						Registrator.GenerateName(BaseNames.MenuBackBackground), 
 						Registrator.GenerateName(BaseNames.MenuBackText)
 					);
+				case BaseNames.MenuExitToMenu:
+					return CreateTextFrame(
+						layout,
+						layout.MenuEntryWidth, layout.MenuEntryHeight, 
+						layout.MenuSettingsX, layout.MenuSettingsY, 
+						layout.MenuExitToMenuTextX, layout.MenuExitToMenuTextY, "Exit to Menu", 
+						Registrator.GenerateName(BaseNames.MenuExitToMenuBackground), 
+						Registrator.GenerateName(BaseNames.MenuExitToMenuText)
+					);
 				default:
 					return CreateTextFrame(
 						layout,
@@ -341,6 +350,29 @@ namespace thrii
 					Registrator.GenerateName(BaseNames.HudScoreText)
 				);
 			}
+		}
+
+		public static Entity CreateLabel(
+			Layout layout, uint x, uint y, string text, BaseNames baseName 
+		)
+		{
+			var label = new Entity(Registrator.GenerateName(baseName));
+
+			var lDisplayComponent = new DisplayComponent();
+			lDisplayComponent.DisplayObject = new Text(text, new Font("helvetica.otf"), layout.FontSize);
+
+			var lPositionComponent = new PositionComponent();
+			lPositionComponent.X = x;
+			lPositionComponent.Y = y;
+
+			var lInterfaceComponent = new InterfaceComponent();
+			lInterfaceComponent.Text = text;
+
+			label.AddComponent(lDisplayComponent);
+			label.AddComponent(lPositionComponent);
+			label.AddComponent(lInterfaceComponent);
+
+			return label;
 		}
 
 		public static Entity CreateGem(
