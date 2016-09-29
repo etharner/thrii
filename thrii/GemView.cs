@@ -47,7 +47,11 @@ namespace thrii
 					break;
 			}
 
-			GemShape = cornerCount == 0 ? new CircleShape(layout.GemSize) : new CircleShape(layout.GemSize, cornerCount);
+			GemShape = cornerCount == 0 ? 
+				new CircleShape(layout.GemSize - 3) : 
+				new CircleShape(layout.GemSize - 3, cornerCount);
+			GemShape.OutlineThickness = 3;
+			GemShape.OutlineColor = Colors.GemOutlineColor;
 			GemShape.FillColor = color;
 		}
 	}
