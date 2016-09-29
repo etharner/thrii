@@ -5,6 +5,8 @@
 		Input,
 		Interface,
 		Scene,
+		Gem,
+		Animation,
 		Render
 	}
 }
