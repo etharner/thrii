@@ -334,21 +334,21 @@ namespace thrii
 						Registrator.GenerateName(BaseNames.HudTimeText)
 					);
 				default:
-				return CreateHudFrame(
-					layout,
-					layout.HudScoreWidth,
-					layout.HudScoreHeight,
-					layout.HudScoreX,
-					layout.HudScoreY,
-					layout.HudScoreTextX,
-					layout.HudScoreTextY,
-					"0",
-					layout.HudScoreLabelX,
-					layout.HudScoreLabelY,
-					"Score",
-					Registrator.GenerateName(BaseNames.Background),
-					Registrator.GenerateName(BaseNames.HudScoreText)
-				);
+					return CreateHudFrame(
+						layout,
+						layout.HudScoreWidth,
+						layout.HudScoreHeight,
+						layout.HudScoreX,
+						layout.HudScoreY,
+						layout.HudScoreTextX,
+						layout.HudScoreTextY,
+						"0",
+						layout.HudScoreLabelX,
+						layout.HudScoreLabelY,
+						"Score",
+						Registrator.GenerateName(BaseNames.Background),
+						Registrator.GenerateName(BaseNames.HudScoreText)
+					);
 			}
 		}
 
@@ -376,20 +376,33 @@ namespace thrii
 		}
 
 		public static Entity CreateGem(
-			Shape gem, uint x, uint y
+			Layout layout, Shape gem, uint x, uint y
 		)
 		{
 			var gemEntity = new Entity(Registrator.GenerateName(BaseNames.Gem));
 
 			var gDisplayComponent = new DisplayComponent();
+			gem.Origin = new SFML.System.Vector2f(
+				gem.GetLocalBounds().Width / 2.0f,
+				gem.GetLocalBounds().Height / 2.0f
+			);
 			gDisplayComponent.DisplayObject = gem;
 
 			var gPositionComponent = new PositionComponent();
 			gPositionComponent.X = x;
 			gPositionComponent.Y = y;
 
+			var gCollisionComponent = new CollisionComponent();
+			gCollisionComponent.BoundingBox = new FloatRect(x ,y, layout.GemSize, layout.GemSize);
+
+			var lAnimationComponent = new AnimationComponent();
+			lAnimationComponent.X = x;
+			lAnimationComponent.Y = y;
+
 			gemEntity.AddComponent(gDisplayComponent);
 			gemEntity.AddComponent(gPositionComponent);
+			gemEntity.AddComponent(gCollisionComponent);
+			gemEntity.AddComponent(lAnimationComponent);
 
 			return gemEntity;
 		}
