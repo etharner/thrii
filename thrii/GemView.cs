@@ -14,11 +14,14 @@ namespace thrii
 	public class GemView
 	{
 		public Shape GemShape { get; set; }
+		public Gems GemType { get; set; }
 
 		public GemView(Gems gemType, Layout layout)
 		{
 			uint cornerCount;
 			Color color;
+
+			GemType = gemType;
 
 			switch (gemType)
 			{
