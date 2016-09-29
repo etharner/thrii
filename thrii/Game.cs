@@ -6,6 +6,7 @@
 
 		public Game()
 		{
+			Settings.ParseSettings();
 			engine = new Engine();
 		}
 
