@@ -1,46 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SFML.Window;
+using SFML.Graphics;
 using SFML.System;
 
 namespace thrii
 {
 	public class InputSystem : System
 	{
-		Window window;
+		List<Node> collisionNodes;
 
-		public InputSystem(Engine e, Window w) : base(e)
+		public InputSystem(Engine e) : base(e)
 		{
-			nodeType = "CollisionNode";
-			engine = e;
-			window = w;
+			collisionNodes = new List<Node>();
 		}
 
-		bool CheckMenuItemPressed(Vector2i pos)
+		protected override void GetNodes()
 		{
-			foreach (CollisionNode target in targets)
+			collisionNodes = engine.GetNodeList("CollisionNode");
+			engine.Renderer.Window.MouseButtonPressed += OnMouseLeftClick;
+		}
+
+		Name SearchClicked(Vector2i pos) {
+			foreach (CollisionNode target in collisionNodes)
 			{
-				if (target.Collision.boundingBox.Contains(pos.X, pos.Y) && 
-				    target.Entity.Name.BaseName == BaseNames.MenuNewGameBackground)
+				if (target.Collision.BoundingBox.Contains(pos.X, pos.Y))
 				{
-					return true;
+					return target.Entity.Name;
 				}
 			}
 
-			return false;
+			return null;
 		}
 
+		void OnMouseLeftClick(object sender, EventArgs e)
+		{
+			if (Mouse.IsButtonPressed(Mouse.Button.Left))
+			{
+				Vector2i pos = Mouse.GetPosition(engine.Renderer.Window);
+
+				Name clicked = SearchClicked(pos);
+				if (clicked != null)
+				{
+					engine.LastClicked.Add(clicked);
+				}
+			}
+		}
 		public override void Update() 
 		{
 			GetNodes();
-			if (Mouse.IsButtonPressed(Mouse.Button.Left))
-			{
-				Vector2i pos = Mouse.GetPosition(window);
-
-				if (CheckMenuItemPressed(pos))
-				{
-					engine.SwitchScene(new SessionScene());
-				}
-			}
 		}
 	}
 }
