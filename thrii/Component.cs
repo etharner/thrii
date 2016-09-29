@@ -4,8 +4,8 @@ namespace thrii
 {
 	public class PositionComponent
 	{
-		public uint X;
-		public uint Y;
+		public float X;
+		public float Y;
 		public float Rotation;
 	}
 
@@ -13,6 +13,8 @@ namespace thrii
 	{
 		public Transformable DisplayObject;
 	}
+
+	public class AnimationComponent : PositionComponent {}
 
 	public class CollisionComponent
 	{
