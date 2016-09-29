@@ -4,12 +4,40 @@ namespace thrii
 {
 	public enum BaseNames
 	{
+		GameSprite,
+
 		MenuNewGame,
 		MenuNewGameBackground,
 		MenuNewGameText,
+
 		MenuSettings,
 		MenuSettingsBackground,
 		MenuSettingsText,
+
+		MenuExit,
+		MenuExitBackground,
+		MenuExitText,
+
+		MenuOptionResolution,
+		MenuOptionResolutionBackground,
+		MenuOptionResolutionText,
+		MenuOptionResolutionLeftButton,
+		MenuOptionResolutionRightButton,
+
+		MenuOptionGameSize,
+		MenuOptionGameSizeBackground,
+		MenuOptionGameSizeText,
+		MenuOptionGameSizeLeftButton,
+		MenuOptionGameSizeRightButton,
+
+		MenuApply,
+		MenuApplyBackground,
+		MenuApplyText,
+
+		MenuBack,
+		MenuBackBackground,
+		MenuBackText,
+
 		Background,
 		Text,
 		SessionBackground,
