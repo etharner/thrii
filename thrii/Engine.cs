@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SFML.Window;
+using SFML.System;
 
 namespace thrii
 {
@@ -10,6 +10,7 @@ namespace thrii
 		Dictionary<string, List<Node>> nodes;
 		public List<Name> LastClicked { get; set; }
 		public Drawer Renderer;
+		public Clock Clock;
 
 		public Engine()
 		{
@@ -17,11 +18,10 @@ namespace thrii
 
 			systemList = new List<System>(Enum.GetNames(typeof(SystemPriority)).Length);
 
-			var renderSystem = new RenderSystem(this);
 			AddSystem(new InputSystem(this), SystemPriority.Input);
 			AddSystem(new InterfaceSystem(this), SystemPriority.Interface);
 			AddSystem(new SceneSystem(this), SystemPriority.Scene);
-			AddSystem(renderSystem, SystemPriority.Render);
+			AddSystem(new RenderSystem(this), SystemPriority.Render);
 
 			nodes = new Dictionary<string, List<Node>>();
 
