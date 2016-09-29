@@ -11,7 +11,8 @@ namespace thrii
 		public List<Name> LastClicked { get; set; }
 		public Drawer Renderer;
 		public Clock Clock;
-		public GameState gameState;
+		public GameState GameState;
+		public bool NeedSwitchScene;
 
 		public Engine()
 		{
@@ -28,9 +29,9 @@ namespace thrii
 
 			LastClicked = new List<Name>();
 
-			gameState = GameState.MENU;
+			GameState = GameState.MENU;
 
-			SwitchScene(new MenuScene());
+			NeedSwitchScene = true;
 
 			Start();
 		}
@@ -105,6 +106,7 @@ namespace thrii
 			{
 				AddEntity(entity);
 			}
+			scene = null;
 		}
 
 		public List<Node> GetNodeList(string nodeClass)
