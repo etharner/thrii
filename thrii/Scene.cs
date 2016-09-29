@@ -79,9 +79,10 @@ namespace thrii
 				{
 					Shape gem = new GemView((Gems)Enum.GetValues(typeof(Gems)).GetValue(rnd.Next(0, 5)), layout).GemShape;
 					EntityList.Add(Spawner.CreateGem(
+						layout,
 						gem, 
-						layout.SessionBackgroundX + layout.GemMargin + layout.GemDistance * i, 
-						layout.SessionBackgroundY + layout.GemMargin + layout.GemDistance * j
+						layout.SessionBackgroundX + layout.GemMargin + layout.GemDistance * j, 
+						layout.SessionBackgroundY + layout.GemMargin + layout.GemDistance * i
 					));
 				}
 			}
