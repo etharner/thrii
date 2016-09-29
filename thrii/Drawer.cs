@@ -7,23 +7,21 @@ namespace thrii
 	public class Drawer
 	{
 		public RenderWindow Window { get; set; }
-		Engine engine;
-		
-		public Drawer(uint width, uint height, string name, string iconPath, Engine e)
+
+		public Drawer(uint width, uint height, string name, string iconPath)
 		{
 			var windowSettings = new ContextSettings();
 			windowSettings.AntialiasingLevel = 8;
 
-			Window = new RenderWindow(new VideoMode(width, height), name,Styles.Default, windowSettings);
+			Window = new RenderWindow(new VideoMode(width, height), name, Styles.Close, windowSettings);
 			SetIcon(iconPath);
 			Window.Closed += OnClosed;
-			engine = e;
 		}
 
 		void SetIcon(string iconPath)
 		{
 			var icon = new Image(iconPath);
-			Window.SetIcon(32, 32, icon.Pixels);
+			Window.SetIcon(256, 256, icon.Pixels);
 		}
 
 		static void OnClosed(object sender, EventArgs e)
@@ -34,16 +32,6 @@ namespace thrii
 		public void Draw(Transformable t) 
 		{
 			Window.Draw((Drawable)t);
-		}
-
-		public void DrawLoop() 
-		{
-			while (Window.IsOpen)
-			{
-				Window.DispatchEvents();
-				engine.Update();
-				Window.Display();
-			}
 		}
 	}
 }
