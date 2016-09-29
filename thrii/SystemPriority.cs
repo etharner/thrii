@@ -1,10 +1,10 @@
-﻿using System;
-namespace thrii
+﻿namespace thrii
 {
-	public class SystemPriority
+	public enum SystemPriority
 	{
-		public SystemPriority()
-		{
-		}
+		Input,
+		Interface,
+		Scene,
+		Render
 	}
 }
