@@ -15,4 +15,9 @@
 	{
 		public CollisionComponent Collision;
 	}
+
+	public class InterfaceNode : Node
+	{
+		public InterfaceComponent Interface;
+	}
 }
