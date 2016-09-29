@@ -13,12 +13,12 @@ namespace thrii
 		public InputSystem(Engine e) : base(e)
 		{
 			collisionNodes = new List<Node>();
+			engine.Renderer.Window.MouseButtonPressed += OnMouseLeftClick;
 		}
 
 		protected override void GetNodes()
 		{
 			collisionNodes = engine.GetNodeList("CollisionNode");
-			engine.Renderer.Window.MouseButtonPressed += OnMouseLeftClick;
 		}
 
 		Name SearchClicked(Vector2i pos) {
@@ -43,6 +43,10 @@ namespace thrii
 				if (clicked != null)
 				{
 					engine.LastClicked.Add(clicked);
+				}
+				else
+				{
+					engine.LastClicked.Clear();
 				}
 			}
 		}
