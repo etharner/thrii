@@ -65,11 +65,12 @@ namespace thrii
 				layout.SessionBackgroundHeight, 
 				layout.SessionBackgroundX,
 				layout.SessionBackgroundY, 
-				Color.Transparent, true, 2, 
+				Color.Transparent, true, 3, 
 				Color.White
 			));
 			EntityList.AddRange(Spawner.CreateHud(layout, BaseNames.HudTime));
 			EntityList.AddRange(Spawner.CreateHud(layout, BaseNames.HudScore));
+
 
 
 			var rnd = new Random();
