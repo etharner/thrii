@@ -11,5 +11,6 @@ namespace thrii
 		public static Color HexagonGemColor = new Color(100, 255, 170);
 		public static Color OctagonGemColor = new Color(239, 246, 194);
 		public static Color GemOutlineColor = new Color(255, 255, 255);
+		public static Color GemSelectedOutlineColor = new Color(90, 90, 90);
 	}
 }
