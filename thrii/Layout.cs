@@ -199,8 +199,8 @@
 			HudScoreLabelY = SessionBackgroundY;
 
 			GemMargin = SessionBackgroundWidth / 50;
-			GemSize = SessionBackgroundWidth / (Settings.GameSize * 2) - GemMargin / Settings.GameSize;
-			GemDistance = GemSize * 2;
+			GemSize = SessionBackgroundWidth / (Settings.GameSize * 2) - SessionBackgroundWidth / 100;
+			GemDistance = GemSize * 2 + GemSize / 3;
 		}
 	}
 }
