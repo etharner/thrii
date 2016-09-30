@@ -88,7 +88,7 @@ namespace thrii
 			tInterfaceComponent.Text = textString;
 			textEntity.AddComponent(tInterfaceComponent);
 
-			textFrame.Add(CreateBackground(layout, width, height, x, y, Color.Transparent, false, 2, Color.White, bgName));
+			textFrame.Add(CreateBackground(layout, width, height, x, y, Color.Transparent, false, 3, Color.White, bgName));
 			textFrame.Add(textEntity);
 
 			return textFrame;
