@@ -51,6 +51,15 @@ namespace thrii
 							target.Position.X + shape.GetLocalBounds().Width / 2.0f, 
 							target.Position.Y + shape.GetLocalBounds().Height / 2.0f
 						);
+
+						if (engine.CheckClicked(target.Entity.Name))
+						{
+							shape.OutlineColor = Colors.GemSelectedOutlineColor;
+						}
+						else
+						{
+							shape.OutlineColor = Colors.GemOutlineColor;
+						}
 					}
 
 					collision.BoundingBox = shape.GetGlobalBounds();
