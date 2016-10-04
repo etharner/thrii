@@ -2,104 +2,104 @@
 {
 	public class Layout
 	{
-		public uint GameSpriteWidth;
-		public uint GameSpriteHeight;
-		public uint GameSpriteX;
-		public uint GameSpriteY;
+		public int GameSpriteWidth;
+		public int GameSpriteHeight;
+		public int GameSpriteX;
+		public int GameSpriteY;
 
-		public uint FontSize;
+		public int FontSize;
 
-		public uint MenuEntryWidth;
-		public uint MenuEntryHeight;
+		public int MenuEntryWidth;
+		public int MenuEntryHeight;
 
-		public uint MenuNewGameX;
-		public uint MenuNewGameY;
-		public uint MenuNewGameTextX;
-		public uint MenuNewGameTextY;
+		public int MenuNewGameX;
+		public int MenuNewGameY;
+		public int MenuNewGameTextX;
+		public int MenuNewGameTextY;
 
-		public uint MenuSettingsX;
-		public uint MenuSettingsY;
-		public uint MenuSettingsTextX;
-		public uint MenuSettingsTextY;
+		public int MenuSettingsX;
+		public int MenuSettingsY;
+		public int MenuSettingsTextX;
+		public int MenuSettingsTextY;
 
-		public uint MenuExitX;
-		public uint MenuExitY;
-		public uint MenuExitTextX;
-		public uint MenuExitTextY;
+		public int MenuExitX;
+		public int MenuExitY;
+		public int MenuExitTextX;
+		public int MenuExitTextY;
 
-		public uint OptionEntryWidth;
-		public uint OptionEntryHeight;
-		public uint OptionEntryButtonSize;
-		public uint OptionEntryButtonMargin;
+		public int OptionEntryWidth;
+		public int OptionEntryHeight;
+		public int OptionEntryButtonSize;
+		public int OptionEntryButtonMargin;
 
-		public uint OptionResolutionLabelX;
-		public uint OptionResolutionLabelY;
-		public uint OptionResolutionX;
-		public uint OptionResolutionY;
-		public uint OptionResolutionTextX;
-		public uint OptionResolutionTextY;
-		public uint OptionResolutionLeftButtonX;
-		public uint OptionResolutionLeftButtonY;
-		public uint OptionResolutionRightButtonX;
-		public uint OptionResolutionRightButtonY;
+		public int OptionResolutionLabelX;
+		public int OptionResolutionLabelY;
+		public int OptionResolutionX;
+		public int OptionResolutionY;
+		public int OptionResolutionTextX;
+		public int OptionResolutionTextY;
+		public int OptionResolutionLeftButtonX;
+		public int OptionResolutionLeftButtonY;
+		public int OptionResolutionRightButtonX;
+		public int OptionResolutionRightButtonY;
 
-		public uint OptionGameSizeLabelX;
-		public uint OptionGameSizeLabelY;
-		public uint OptionGameSizeX;
-		public uint OptionGameSizeY;
-		public uint OptionGameSizeTextX;
-		public uint OptionGameSizeTextY;
-		public uint OptionGameSizeLeftButtonX; 
-		public uint OptionGameSizeLeftButtonY;
-		public uint OptionGameSizeRightButtonX;
-		public uint OptionGameSizeRightButtonY;
+		public int OptionGameSizeLabelX;
+		public int OptionGameSizeLabelY;
+		public int OptionGameSizeX;
+		public int OptionGameSizeY;
+		public int OptionGameSizeTextX;
+		public int OptionGameSizeTextY;
+		public int OptionGameSizeLeftButtonX; 
+		public int OptionGameSizeLeftButtonY;
+		public int OptionGameSizeRightButtonX;
+		public int OptionGameSizeRightButtonY;
 
-		public uint MenuApplyX;
-		public uint MenuApplyY;
-		public uint MenuApplyTextX;
-		public uint MenuApplyTextY;
+		public int MenuApplyX;
+		public int MenuApplyY;
+		public int MenuApplyTextX;
+		public int MenuApplyTextY;
 
-		public uint MenuBackX;
-		public uint MenuBackY;
-		public uint MenuBackTextX;
-		public uint MenuBackTextY;
+		public int MenuBackX;
+		public int MenuBackY;
+		public int MenuBackTextX;
+		public int MenuBackTextY;
 
-		public uint MenuGameOverX;
-		public uint MenuGameOverY;
+		public int MenuGameOverX;
+		public int MenuGameOverY;
 
-		public uint MenuScoreX;
-		public uint MenuScoreY;
+		public int MenuScoreX;
+		public int MenuScoreY;
 
-		public uint MenuExitToMenuTextX;
-		public uint MenuExitToMenuTextY;
+		public int MenuExitToMenuTextX;
+		public int MenuExitToMenuTextY;
 
-		public uint SessionBackgroundMargin;
-		public uint SessionBackgroundWidth;
-		public uint SessionBackgroundHeight;
-		public uint SessionBackgroundX;
-		public uint SessionBackgroundY;
+		public int SessionBackgroundMargin;
+		public int SessionBackgroundWidth;
+		public int SessionBackgroundHeight;
+		public int SessionBackgroundX;
+		public int SessionBackgroundY;
 
-		public uint HudTimeWidth;
-		public uint HudTimeHeight;
-		public uint HudTimeX;
-		public uint HudTimeY;
-		public uint HudTimeTextX;
-		public uint HudTimeTextY;
-		public uint HudTimeLabelX;
-		public uint HudTimeLabelY;
+		public int HudTimeWidth;
+		public int HudTimeHeight;
+		public int HudTimeX;
+		public int HudTimeY;
+		public int HudTimeTextX;
+		public int HudTimeTextY;
+		public int HudTimeLabelX;
+		public int HudTimeLabelY;
 
-		public uint HudScoreWidth;
-		public uint HudScoreHeight;
-		public uint HudScoreX;
-		public uint HudScoreY;
-		public uint HudScoreTextX;
-		public uint HudScoreTextY;
-		public uint HudScoreLabelX;
-		public uint HudScoreLabelY;
+		public int HudScoreWidth;
+		public int HudScoreHeight;
+		public int HudScoreX;
+		public int HudScoreY;
+		public int HudScoreTextX;
+		public int HudScoreTextY;
+		public int HudScoreLabelX;
+		public int HudScoreLabelY;
 
-		public uint GemMargin;
-		public uint GemSize;
-		public uint GemDistance;
+		public int GemMargin;
+		public int GemSize;
+		public int GemDistance;
 
 		public Layout()
 		{

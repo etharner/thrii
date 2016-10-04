@@ -20,27 +20,27 @@ namespace thrii
 			new SFML.System.Vector2i(1280, 960),
 
 		};
-		public static List<uint> SupportedGameSizes = new List<uint>() { 4, 8, 12, 16 };
+		public static List<int> SupportedGameSizes = new List<int>() { 4, 8, 12, 16 };
 		public static int ResolutionIndex;
 		public static int GameSizeIndex;
 		public static int PrevResolutionIndex;
 		public static int PrevGameSizeIndex;
-		public static uint Width;
-		public static uint Height;
+		public static int Width;
+		public static int Height;
 		public static string Name;
 		public static string IconPath;
-		public static uint GameSize;
+		public static int GameSize;
 
 		public static void ParseSettings()
 		{
 			var xml = new XmlDocument();
 			xml.Load(settingsFile);
 
-			Width = uint.Parse(xml.GetElementsByTagName("Width")[0].InnerText);
-			Height = uint.Parse(xml.GetElementsByTagName("Height")[0].InnerText);
+			Width = int.Parse(xml.GetElementsByTagName("Width")[0].InnerText);
+			Height = int.Parse(xml.GetElementsByTagName("Height")[0].InnerText);
 			Name = xml.GetElementsByTagName("Name")[0].InnerText;
 			IconPath = xml.GetElementsByTagName("IconPath")[0].InnerText;
-			GameSize = uint.Parse(xml.GetElementsByTagName("GameSize")[0].InnerText);
+			GameSize = int.Parse(xml.GetElementsByTagName("GameSize")[0].InnerText);
 
 			ResolutionIndex = SupportedResolutions.FindIndex(r => r.X == Width && r.Y == Height);
 			PrevResolutionIndex = ResolutionIndex;
@@ -53,8 +53,8 @@ namespace thrii
 		{
 			var newResolution = SupportedResolutions[index];
 
-			Width = (uint)newResolution.X;
-			Height = (uint)newResolution.Y;
+			Width = newResolution.X;
+			Height = newResolution.Y;
 
 			ResolutionIndex = index;
 
