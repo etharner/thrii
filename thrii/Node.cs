@@ -30,4 +30,9 @@
 	{
 		public InterfaceComponent Interface;
 	}
+
+	public class GemNode : Node
+	{
+		public GemComponent Gem;
+	}
 }

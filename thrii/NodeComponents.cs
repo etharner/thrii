@@ -32,6 +32,11 @@ namespace thrii
 					{ 
 						new KeyValuePair<string, string>("InterfaceComponent", "Interface")
 					}
+				},
+				{ "GemNode", new List<KeyValuePair<string, string>>() 
+					{ 
+						new KeyValuePair<string, string>("GemComponent", "Gem")
+					}
 				}
 			};
 	}

@@ -30,7 +30,7 @@ namespace thrii
 		}
 
 		public static Entity CreateBackground(
-			Layout layout, uint width, uint height, uint x, uint y, 
+			Layout layout, int width, int height, int x, int y, 
 			Color color, bool isGlobalBackground, int outline = 0, Color outlineColor = new Color(), 
 			Name name = null
 		)
@@ -65,8 +65,8 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateTextFrame(
-			Layout layout, uint width, uint height, uint x, uint y, 
-			uint textX, uint textY, string textString,
+			Layout layout, int width, int height, int x, int y, 
+			int textX, int textY, string textString,
 			Name bgName = null, Name textName = null
 		)
 		{
@@ -75,7 +75,7 @@ namespace thrii
 			var textEntity = new Entity(textName == null ? Registrator.GenerateName(BaseNames.Text) : textName);
 
 			var tDisplayComponent = new DisplayComponent();
-			var text = new Text(textString, new Font("helvetica.otf"), layout.FontSize);
+			var text = new Text(textString, new Font("helvetica.otf"), (uint)layout.FontSize);
 			tDisplayComponent.DisplayObject = text;
 			textEntity.AddComponent(tDisplayComponent);
 
@@ -160,9 +160,9 @@ namespace thrii
 
 		public static List<Entity> CreateChooseFrame(
 			Layout layout, 
-			uint width, uint height, uint x, uint y, uint textX, uint textY, string textString,
-			uint labelX, uint labelY, string labelText,
-			uint leftX, uint leftY, uint rightX, uint rightY,
+			int width, int height, int x, int y, int textX, int textY, string textString,
+			int labelX, int labelY, string labelText,
+			int leftX, int leftY, int rightX, int rightY,
 			Name bgName = null, Name textName = null, 
 			Name leftName = null, Name rightName = null
 		)
@@ -172,7 +172,7 @@ namespace thrii
 			var textLabel = new Entity(Registrator.GenerateName(BaseNames.Text));
 
 			var tlDisplayComponent = new DisplayComponent();
-			var tlText = new Text(labelText, new Font("helvetica.otf"), layout.FontSize);
+			var tlText = new Text(labelText, new Font("helvetica.otf"), (uint)layout.FontSize);
 			tlDisplayComponent.DisplayObject = tlText;
 
 			var tlPositionComponent = new PositionComponent();
@@ -281,8 +281,8 @@ namespace thrii
 
 		public static List<Entity> CreateHudFrame(
 			Layout layout, 
-			uint width, uint height, uint x, uint y, uint textX, uint textY, string textString,
-			uint labelX, uint labelY, string labelText,
+			int width, int height, int x, int y, int textX, int textY, string textString,
+			int labelX, int labelY, string labelText,
 			Name bgName = null, Name textName = null
 		)
 		{
@@ -291,7 +291,7 @@ namespace thrii
 			var textLabel = new Entity(Registrator.GenerateName(BaseNames.Text));
 
 			var tlDisplayComponent = new DisplayComponent();
-			var tlText = new Text(labelText, new Font("helvetica.otf"), layout.FontSize);
+			var tlText = new Text(labelText, new Font("helvetica.otf"), (uint)layout.FontSize);
 			tlDisplayComponent.DisplayObject = tlText;
 
 			var tlPositionComponent = new PositionComponent();
@@ -353,13 +353,13 @@ namespace thrii
 		}
 
 		public static Entity CreateLabel(
-			Layout layout, uint x, uint y, string text, BaseNames baseName 
+			Layout layout, int x, int y, string text, BaseNames baseName 
 		)
 		{
 			var label = new Entity(Registrator.GenerateName(baseName));
 
 			var lDisplayComponent = new DisplayComponent();
-			lDisplayComponent.DisplayObject = new Text(text, new Font("helvetica.otf"), layout.FontSize);
+			lDisplayComponent.DisplayObject = new Text(text, new Font("helvetica.otf"), (uint)layout.FontSize);
 
 			var lPositionComponent = new PositionComponent();
 			lPositionComponent.X = x;
@@ -376,17 +376,17 @@ namespace thrii
 		}
 
 		public static Entity CreateGem(
-			Layout layout, Shape gem, uint x, uint y
+			Layout layout, GemView gem, int x, int y
 		)
 		{
 			var gemEntity = new Entity(Registrator.GenerateName(BaseNames.Gem));
 
 			var gDisplayComponent = new DisplayComponent();
-			gem.Origin = new SFML.System.Vector2f(
-				gem.GetLocalBounds().Width / 2.0f,
-				gem.GetLocalBounds().Height / 2.0f
+			gem.GemShape.Origin = new SFML.System.Vector2f(
+				gem.GemShape.GetLocalBounds().Width / 2.0f,
+				gem.GemShape.GetLocalBounds().Height / 2.0f
 			);
-			gDisplayComponent.DisplayObject = gem;
+			gDisplayComponent.DisplayObject = gem.GemShape;
 
 			var gPositionComponent = new PositionComponent();
 			gPositionComponent.X = x;
@@ -395,14 +395,18 @@ namespace thrii
 			var gCollisionComponent = new CollisionComponent();
 			gCollisionComponent.BoundingBox = new FloatRect(x ,y, layout.GemSize, layout.GemSize);
 
-			var lAnimationComponent = new AnimationComponent();
-			lAnimationComponent.X = x;
-			lAnimationComponent.Y = y;
+			var gAnimationComponent = new AnimationComponent();
+			gAnimationComponent.X = x;
+			gAnimationComponent.Y = y;
+
+			var gGemComponent = new GemComponent();
+			gGemComponent.GemType = gem.GemType;
 
 			gemEntity.AddComponent(gDisplayComponent);
 			gemEntity.AddComponent(gPositionComponent);
 			gemEntity.AddComponent(gCollisionComponent);
-			gemEntity.AddComponent(lAnimationComponent);
+			gemEntity.AddComponent(gAnimationComponent);
+			gemEntity.AddComponent(gGemComponent);
 
 			return gemEntity;
 		}

@@ -25,4 +25,9 @@ namespace thrii
 	{
 		public string Text;
 	}
+
+	public class GemComponent
+	{
+		public Gem GemType;
+	}
 }
