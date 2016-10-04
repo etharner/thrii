@@ -2,7 +2,7 @@
 
 namespace thrii
 {
-	public enum Gems
+	public enum Gem
 	{
 		Circle,
 		Romb,
@@ -14,9 +14,9 @@ namespace thrii
 	public class GemView
 	{
 		public Shape GemShape { get; set; }
-		public Gems GemType { get; set; }
+		public Gem GemType { get; set; }
 
-		public GemView(Gems gemType, Layout layout)
+		public GemView(Gem gemType, Layout layout)
 		{
 			uint cornerCount;
 			Color color;
@@ -25,19 +25,19 @@ namespace thrii
 
 			switch (gemType)
 			{
-				case Gems.Romb:
+				case Gem.Romb:
 					cornerCount = 4;
 					color = Colors.RombGemColor;
 					break;
-				case Gems.Pentagon:
+				case Gem.Pentagon:
 					cornerCount = 5;
 					color = Colors.PentagonGemColor;
 					break;
-				case Gems.Hexagon:
+				case Gem.Hexagon:
 					cornerCount = 6;
 					color = Colors.HexagonGemColor;
 					break;
-				case Gems.Octagon:
+				case Gem.Octagon:
 					cornerCount = 8;
 					color = Colors.OctagonGemColor;
 					break;

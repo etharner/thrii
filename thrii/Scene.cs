@@ -74,11 +74,11 @@ namespace thrii
 
 
 			var rnd = new Random();
-			for (uint i = 0; i < Settings.GameSize; i++)
+			for (int i = 0; i < Settings.GameSize; i++)
 			{
-				for (uint j = 0; j < Settings.GameSize; j++)
+				for (int j = 0; j < Settings.GameSize; j++)
 				{
-					Shape gem = new GemView((Gems)Enum.GetValues(typeof(Gems)).GetValue(rnd.Next(0, 5)), layout).GemShape;
+					var gem = new GemView((Gem)Enum.GetValues(typeof(Gem)).GetValue(rnd.Next(0, 5)), layout);
 					EntityList.Add(Spawner.CreateGem(
 						layout,
 						gem, 
