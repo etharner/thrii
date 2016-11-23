@@ -19,6 +19,8 @@
 	public class AnimationNode : Node
 	{
 		public AnimationComponent Animation;
+		public PositionComponent Position;
+		public DisplayComponent Display;
 	}
 
 	public class CollisionNode : Node
@@ -33,6 +35,9 @@
 
 	public class GemNode : Node
 	{
+		public DisplayComponent Display;
+		public PositionComponent Position;
+		public AnimationComponent Animation;
 		public GemComponent Gem;
 	}
 }
