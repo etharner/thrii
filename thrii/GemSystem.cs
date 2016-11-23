@@ -189,6 +189,8 @@ namespace thrii
 
 				if (gemSubType == GemSub.Line)
 				{
+					engine.Playlist.Add(Assets.DestroyerSound);
+
 					if (gridPos.Y - 1 >= 0 && 
 					    deleteList.Contains(idGrid[index - 1]) ||
 					   	gridPos.Y + 1 < Settings.GameSize && 
@@ -504,7 +506,7 @@ namespace thrii
 					{
 						if (engine.Playlist.Count == 0)
 						{
-							engine.Playlist.Add(Assets.DestroySound);
+							engine.Playlist.Add(Assets.GemSound);
 						}
 
 						engine.Score += 10 * needDelete.Count;

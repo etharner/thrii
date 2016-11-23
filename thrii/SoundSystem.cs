@@ -28,7 +28,8 @@ namespace thrii
 	public class SoundSystem : System
 	{
 		MusicEntry backgroundMusic;
-		Sound destroySound;
+		Sound gemSound;
+		Sound destroyerSound;
 		Sound boomSound;
 		Random random;
 
@@ -39,7 +40,8 @@ namespace thrii
 			backgroundMusic = getRandomSong();
 			backgroundMusic.Play();
 
-			destroySound = new Sound(new SoundBuffer(Assets.DestroySound));
+			gemSound = new Sound(new SoundBuffer(Assets.GemSound));
+			destroyerSound = new Sound(new SoundBuffer(Assets.DestroyerSound));
 			boomSound = new Sound(new SoundBuffer(Assets.BoomSound));
 		}
 
@@ -58,10 +60,15 @@ namespace thrii
 
 			foreach (string audioFile in engine.Playlist)
 			{
-				if (audioFile == Assets.DestroySound)
+				if (audioFile == Assets.GemSound)
 				{
-					destroySound.Volume = Settings.Volume;
-					destroySound.Play();
+					gemSound.Volume = Settings.Volume;
+					gemSound.Play();
+				}
+				else if (audioFile == Assets.DestroyerSound)
+				{
+					destroyerSound.Volume = Settings.Volume;
+					destroyerSound.Play();
 				}
 				else if (audioFile == Assets.BoomSound)
 				{

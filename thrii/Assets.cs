@@ -26,7 +26,8 @@ namespace thrii
 		public static List<string> Music = new List<string> {
 			"thrii1.ogg", "thrii2.ogg", "thrii3.ogg", "thrii4.ogg"
 		};
-		public static string DestroySound = "destroy.ogg";
+		public static string GemSound = "gem.ogg";
+		public static string DestroyerSound = "destroyer.ogg";
 		public static string BoomSound = "boom.ogg";
 	}
 }
