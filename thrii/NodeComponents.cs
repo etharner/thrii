@@ -20,7 +20,9 @@ namespace thrii
 				},
 				{"AnimationNode", new List<KeyValuePair<string, string>>() 
 					{ 
-						new KeyValuePair<string, string>("AnimationComponent", "Animation")
+						new KeyValuePair<string, string>("AnimationComponent", "Animation"),
+						new KeyValuePair<string, string>("PositionComponent", "Position"),
+						new KeyValuePair<string, string>("DisplayComponent", "Display")
 					}
 				},
 				{ "CollisionNode", new List<KeyValuePair<string, string>>() 
@@ -35,6 +37,9 @@ namespace thrii
 				},
 				{ "GemNode", new List<KeyValuePair<string, string>>() 
 					{ 
+						new KeyValuePair<string, string>("DisplayComponent", "Display"),
+						new KeyValuePair<string, string>("PositionComponent", "Position"),
+						new KeyValuePair<string, string>("AnimationComponent", "Animation"),
 						new KeyValuePair<string, string>("GemComponent", "Gem")
 					}
 				}
