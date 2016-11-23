@@ -4,6 +4,23 @@
 	{
 		public SceneSystem(Engine e) : base(e) {}
 
+		void StartLevel(LevelInfo levelInfo)
+		{
+			engine.LastClicked.Clear();
+
+			engine.GameState = GameState.NewGame;
+
+			engine.CurrentLevel = levelInfo;
+
+			Settings.GameSize = levelInfo.GameSize;
+
+			engine.ResetSystems();
+
+			engine.SwitchScene(new SessionScene());
+
+			engine.SessionClock = new SFML.System.Clock();
+		}
+
 		public override void Update()
 		{
 			if (engine.NeedSwitchScene)
@@ -33,13 +50,26 @@
 			{
 				engine.LastClicked.Clear();
 
-				engine.GameState = GameState.NewGame;
+				//engine.GameState = GameState.NewGame;
 
 				engine.ResetSystems();
 
-				engine.SwitchScene(new SessionScene());
+				engine.SwitchScene(new LevelScene());
 
 				engine.SessionClock = new SFML.System.Clock();
+			}
+
+			if (engine.CheckClicked(BaseNames.Level))
+			{
+				int i = engine.LastClicked.Find(n => n.BaseName == BaseNames.Level).Id;
+				LevelInfo l = Levels.LevelsList[i];
+
+				StartLevel(l);
+			}
+
+			if (engine.CheckClicked(BaseNames.LevelNewGameBackground))
+			{
+				StartLevel(Levels.LevelsList[0]);	
 			}
 
 			if (engine.CheckClicked(BaseNames.MenuSettingsBackground))
@@ -84,6 +114,8 @@
 				engine.LastClicked.Clear();
 
 				engine.GameState = GameState.Menu;
+
+				Settings.RestoreGameSize();
 
 				engine.ResetSystems();
 

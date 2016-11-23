@@ -74,6 +74,7 @@
     <Compile Include="AnimationSystem.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="SoundSystem.cs" />
+    <Compile Include="Levels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
