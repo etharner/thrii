@@ -44,6 +44,8 @@ namespace thrii
 		MenuBackBackground,
 		MenuBackText,
 
+		GameOver,
+
 		MenuScore,
 
 		MenuExitToMenu,
@@ -60,6 +62,13 @@ namespace thrii
 
 		HudGoal,
 		HudGoalText,
+
+		Level,
+		LevelExitToMenu,
+		LevelNewGame,
+
+		LevelNewGameBackground,
+		LevelNewGameText,
 
 		Background,
 		Text,

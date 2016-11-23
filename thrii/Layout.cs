@@ -117,6 +117,20 @@
 		public static int HudGoalLabelX;
 		public static int HudGoalLabelY;
 
+		public static int HudLevelWidth;
+		public static int HudLevelHeight;
+		public static int HudLevelDistance;
+
+		public static int LevelExitToMenuX;
+		public static int LevelExitToMenuY;
+		public static int LevelExitToMenuTextX;
+		public static int LevelExitToMenuTextY;
+
+		public static int LevelNewGameX;
+		public static int LevelNewGameY;
+		public static int LevelNewGameTextX;
+		public static int LevelNewGameTextY;
+
 		public static int GemMargin;
 		public static int GemSize;
 		public static int GemDistance;
@@ -198,7 +212,7 @@
 			MenuBackTextX = MenuBackX + MenuEntryWidth / 3;
 			MenuBackTextY = MenuBackY;
 
-			MenuGameOverX = MenuNewGameTextX;
+			MenuGameOverX = MenuNewGameTextX + FontSize / 2;
 			MenuGameOverY = MenuNewGameY - MenuEntryHeight * 2;
 
 			MenuScoreX = MenuSettingsX + MenuEntryWidth / 6;
@@ -239,6 +253,20 @@
 			HudGoalTextY = HudGoalY + FontSize / 4;
 			HudGoalLabelX = HudGoalX + FontSize / 3;
 			HudGoalLabelY = SessionBackgroundY + MenuEntryHeight * 2;
+
+			HudLevelWidth = MenuEntryWidth / 4 + MenuEntryWidth / 4;
+			HudLevelHeight = HudLevelWidth;
+			HudLevelDistance = FontSize + FontSize / 2;
+
+			LevelExitToMenuX = HudLevelDistance;
+			LevelExitToMenuY = MenuExitY;
+			LevelExitToMenuTextX = LevelExitToMenuX + FontSize / 2;
+			LevelExitToMenuTextY = LevelExitToMenuY;
+			
+			LevelNewGameX = SessionBackgroundWidth - FontSize - FontSize / 2 - FontSize / 8;
+			LevelNewGameY = LevelExitToMenuY;
+			LevelNewGameTextX = LevelNewGameX + FontSize;
+			LevelNewGameTextY = LevelNewGameY;
 
 			GemMargin = SessionBackgroundWidth / 50;
 			GemSize = SessionBackgroundWidth / Settings.GameSize / 2 - GemMargin / (Settings.GameSize / 4);
