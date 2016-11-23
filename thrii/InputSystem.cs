@@ -13,7 +13,14 @@ namespace thrii
 		public InputSystem(Engine e) : base(e)
 		{
 			collisionNodes = new List<Node>();
-			engine.Renderer.Window.MouseButtonPressed += OnMouseLeftClick;
+
+			if (e.Renderer.JustCreated)
+			{
+				engine.Renderer.Window.MouseButtonPressed += OnMouseLeftClick;
+				engine.Renderer.Window.KeyPressed += OnEscapeClick;
+
+				e.Renderer.JustCreated = false;
+			}
 		}
 
 		protected override void GetNodes()
@@ -22,11 +29,15 @@ namespace thrii
 		}
 
 		Name SearchClicked(Vector2i pos) {
+			GetNodes();
 			foreach (CollisionNode target in collisionNodes)
 			{
 				if (target.Collision.BoundingBox.Contains(pos.X, pos.Y))
 				{
-					return target.Entity.Name;
+					if (target.Entity.Name.BaseName != BaseNames.Destroyer)
+					{
+						return target.Entity.Name;
+					}
 				}
 			}
 
@@ -50,9 +61,16 @@ namespace thrii
 				}
 			}
 		}
-		public override void Update() 
+
+		void OnEscapeClick(object sender, EventArgs e)
 		{
-			GetNodes();
+			if (Keyboard.IsKeyPressed(Keyboard.Key.Escape) && engine.GameState == GameState.NewGame)
+			{
+				engine.NeedSwitchScene = true;
+				engine.GameState = GameState.GameOver;
+			}	
 		}
+
+		public override void Update() { }
 	}
 }
