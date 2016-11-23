@@ -2,8 +2,8 @@
 {
 	public enum GameState
 	{
-		MENU,
-		NEW_GAME,
-		GAME_OVER
+		Menu,
+		NewGame,
+		GameOver
 	}
 }
