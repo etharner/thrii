@@ -5,23 +5,23 @@ namespace thrii
 {
 	public static class Spawner
 	{
-		public static Entity CreateGameSprite(Layout layout)
+		public static Entity CreateGameSprite()
 		{
 			var sprite = new Entity(Registrator.GenerateName(BaseNames.GameSprite));
 
 			var sDisplayComponent = new DisplayComponent();
-			var sTexture = new Texture("gameSprite.png");
+			var sTexture = new Texture(Assets.GameLogo);
 
 			var sSprite = new Sprite(sTexture);
 			sSprite.Scale = new SFML.System.Vector2f(
-				layout.GameSpriteWidth / sSprite.GetLocalBounds().Width, 
-				layout.GameSpriteHeight / sSprite.GetLocalBounds().Height
+				Layout.GameSpriteWidth / sSprite.GetLocalBounds().Width, 
+				Layout.GameSpriteHeight / sSprite.GetLocalBounds().Height
 			);
 			sDisplayComponent.DisplayObject = sSprite;
 
 			var sPositionComponent = new PositionComponent();
-			sPositionComponent.X = layout.GameSpriteX;
-			sPositionComponent.Y = layout.GameSpriteY;
+			sPositionComponent.X = Layout.GameSpriteX;
+			sPositionComponent.Y = Layout.GameSpriteY;
 
 			sprite.AddComponent(sDisplayComponent);
 			sprite.AddComponent(sPositionComponent);
@@ -30,7 +30,7 @@ namespace thrii
 		}
 
 		public static Entity CreateBackground(
-			Layout layout, int width, int height, int x, int y, 
+			int width, int height, int x, int y, 
 			Color color, bool isGlobalBackground, int outline = 0, Color outlineColor = new Color(), 
 			Name name = null
 		)
@@ -65,7 +65,7 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateTextFrame(
-			Layout layout, int width, int height, int x, int y, 
+			int width, int height, int x, int y, 
 			int textX, int textY, string textString,
 			Name bgName = null, Name textName = null
 		)
@@ -75,7 +75,7 @@ namespace thrii
 			var textEntity = new Entity(textName == null ? Registrator.GenerateName(BaseNames.Text) : textName);
 
 			var tDisplayComponent = new DisplayComponent();
-			var text = new Text(textString, new Font("helvetica.otf"), (uint)layout.FontSize);
+			var text = new Text(textString, new Font(Assets.Font), (uint)Layout.FontSize);
 			tDisplayComponent.DisplayObject = text;
 			textEntity.AddComponent(tDisplayComponent);
 
@@ -88,14 +88,13 @@ namespace thrii
 			tInterfaceComponent.Text = textString;
 			textEntity.AddComponent(tInterfaceComponent);
 
-			textFrame.Add(CreateBackground(layout, width, height, x, y, Color.Transparent, false, 3, Color.White, bgName));
+			textFrame.Add(CreateBackground(width, height, x, y, Color.Transparent, false, 3, Color.White, bgName));
 			textFrame.Add(textEntity);
 
 			return textFrame;
 		}
 
 		public static List<Entity> CreateMenuEntry(
-			Layout layout,
 			BaseNames entryName
 		)
 		{
@@ -103,55 +102,49 @@ namespace thrii
 			{
 				case BaseNames.MenuNewGame:
 					return CreateTextFrame(
-						layout,
-						layout.MenuEntryWidth, layout.MenuEntryHeight, 
-						layout.MenuNewGameX, layout.MenuNewGameY, 
-						layout.MenuNewGameTextX, layout.MenuNewGameTextY, "New Game", 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuNewGameX, Layout.MenuNewGameY, 
+						Layout.MenuNewGameTextX, Layout.MenuNewGameTextY, "New Game", 
 						Registrator.GenerateName(BaseNames.MenuNewGameBackground), 
 						Registrator.GenerateName(BaseNames.MenuNewGameText)
 					);
 				case BaseNames.MenuSettings:
 					return CreateTextFrame(
-						layout,
-						layout.MenuEntryWidth, layout.MenuEntryHeight, 
-						layout.MenuSettingsX, layout.MenuSettingsY, 
-						layout.MenuSettingsTextX, layout.MenuSettingsTextY, "Settings", 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuSettingsX, Layout.MenuSettingsY, 
+						Layout.MenuSettingsTextX, Layout.MenuSettingsTextY, "Settings", 
 						Registrator.GenerateName(BaseNames.MenuSettingsBackground), 
 						Registrator.GenerateName(BaseNames.MenuSettingsText)
 					);
 				case BaseNames.MenuApply:
 					return CreateTextFrame(
-						layout,
-						layout.MenuEntryWidth, layout.MenuEntryHeight, 
-						layout.MenuApplyX, layout.MenuApplyY, 
-						layout.MenuApplyTextX, layout.MenuApplyTextY, "Apply", 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuApplyX, Layout.MenuApplyY, 
+						Layout.MenuApplyTextX, Layout.MenuApplyTextY, "Apply", 
 						Registrator.GenerateName(BaseNames.MenuApplyBackground), 
 						Registrator.GenerateName(BaseNames.MenuApplyText)
 					);
 				case BaseNames.MenuBack:
 					return CreateTextFrame(
-						layout,
-						layout.MenuEntryWidth, layout.MenuEntryHeight, 
-						layout.MenuBackX, layout.MenuBackY, 
-						layout.MenuBackTextX, layout.MenuBackTextY, "Back", 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuBackX, Layout.MenuBackY, 
+						Layout.MenuBackTextX, Layout.MenuBackTextY, "Back", 
 						Registrator.GenerateName(BaseNames.MenuBackBackground), 
 						Registrator.GenerateName(BaseNames.MenuBackText)
 					);
 				case BaseNames.MenuExitToMenu:
 					return CreateTextFrame(
-						layout,
-						layout.MenuEntryWidth, layout.MenuEntryHeight, 
-						layout.MenuSettingsX, layout.MenuSettingsY, 
-						layout.MenuExitToMenuTextX, layout.MenuExitToMenuTextY, "Exit to Menu", 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuSettingsX, Layout.MenuSettingsY, 
+						Layout.MenuExitToMenuTextX, Layout.MenuExitToMenuTextY, "Exit to Menu", 
 						Registrator.GenerateName(BaseNames.MenuExitToMenuBackground), 
 						Registrator.GenerateName(BaseNames.MenuExitToMenuText)
 					);
 				default:
 					return CreateTextFrame(
-						layout,
-						layout.MenuEntryWidth, layout.MenuEntryHeight, 
-						layout.MenuExitX, layout.MenuExitY, 
-						layout.MenuExitTextX, layout.MenuExitTextY, "Exit", 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
+						Layout.MenuExitX, Layout.MenuExitY, 
+						Layout.MenuExitTextX, Layout.MenuExitTextY, "Exit", 
 						Registrator.GenerateName(BaseNames.MenuExitBackground), 
 						Registrator.GenerateName(BaseNames.MenuExitText)
 					);	
@@ -159,7 +152,6 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateChooseFrame(
-			Layout layout, 
 			int width, int height, int x, int y, int textX, int textY, string textString,
 			int labelX, int labelY, string labelText,
 			int leftX, int leftY, int rightX, int rightY,
@@ -172,7 +164,7 @@ namespace thrii
 			var textLabel = new Entity(Registrator.GenerateName(BaseNames.Text));
 
 			var tlDisplayComponent = new DisplayComponent();
-			var tlText = new Text(labelText, new Font("helvetica.otf"), (uint)layout.FontSize);
+			var tlText = new Text(labelText, new Font(Assets.Font), (uint)Layout.FontSize);
 			tlDisplayComponent.DisplayObject = tlText;
 
 			var tlPositionComponent = new PositionComponent();
@@ -182,16 +174,19 @@ namespace thrii
 			textLabel.AddComponent(tlDisplayComponent);
 			textLabel.AddComponent(tlPositionComponent);
 
-			var textFrame = CreateTextFrame(layout, width, height, x, y, textX, textY, textString, bgName, textName);
+			var textFrame = CreateTextFrame(width, height, x, y, textX, textY, textString, bgName, textName);
 
 			var optionLeftButton = new Entity(leftName);
 
 			var lDisplayComponent = new DisplayComponent();
-			var lShape = new CircleShape(layout.OptionEntryButtonSize, 3);
+			var lShape = new CircleShape(Layout.OptionEntryButtonSize, 3);
 			lShape.Origin = new SFML.System.Vector2f(
 				lShape.GetLocalBounds().Width / 2,
 				lShape.GetLocalBounds().Height / 2
 			);
+			lShape.FillColor = Color.Transparent;
+			lShape.OutlineThickness = 3;
+			lShape.OutlineColor = Color.White;
 			lDisplayComponent.DisplayObject = lShape;
 
 			var lPositionComponent = new PositionComponent();
@@ -201,7 +196,7 @@ namespace thrii
 
 			var lCollisionComponent = new CollisionComponent();
 			lCollisionComponent.BoundingBox = new FloatRect(
-				leftX, leftY, layout.OptionEntryButtonSize, layout.OptionEntryButtonSize
+				leftX, leftY, Layout.OptionEntryButtonSize, Layout.OptionEntryButtonSize
 			);
 
 			optionLeftButton.AddComponent(lDisplayComponent);
@@ -211,11 +206,14 @@ namespace thrii
 			var optionRightButton = new Entity(rightName);
 
 			var rDisplayComponent = new DisplayComponent();
-			var rShape = new CircleShape(layout.OptionEntryButtonSize, 3);
+			var rShape = new CircleShape(Layout.OptionEntryButtonSize, 3);
 			rShape.Origin = new SFML.System.Vector2f(
 				rShape.GetLocalBounds().Width / 2,
 				rShape.GetLocalBounds().Height / 2
 			);
+			rShape.FillColor = Color.Transparent;
+			rShape.OutlineThickness = 3;
+			rShape.OutlineColor = Color.White;
 			rDisplayComponent.DisplayObject = rShape;
 
 			var rPositionComponent = new PositionComponent();
@@ -225,7 +223,7 @@ namespace thrii
 
 			var rCollisionComponent = new CollisionComponent();
 			rCollisionComponent.BoundingBox = new FloatRect(
-				rightX, rightY, layout.OptionEntryButtonSize, layout.OptionEntryButtonSize
+				rightX, rightY, Layout.OptionEntryButtonSize, Layout.OptionEntryButtonSize
 			);
 
 			optionRightButton.AddComponent(rDisplayComponent);
@@ -241,21 +239,33 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateOptionEntry(
-			Layout layout,
 			BaseNames optionName
 		)
 		{
 			switch (optionName){
+				case BaseNames.MenuOptionVolume:
+					return CreateChooseFrame(
+						Layout.OptionEntryWidth, Layout.OptionEntryHeight,
+						Layout.OptionVolumeX, Layout.OptionVolumeY,
+						Layout.OptionVolumeTextX, Layout.OptionVolumeY,
+						Settings.Volume.ToString(),
+						Layout.OptionVolumeLabelX, Layout.OptionVolumeLabelY, "Volume",
+						Layout.OptionVolumeLeftButtonX, Layout.OptionVolumeLeftButtonY,
+						Layout.OptionVolumeRightButtonX, Layout.OptionVolumeRightButtonY,
+						Registrator.GenerateName(BaseNames.MenuOptionVolumeBackground),
+						Registrator.GenerateName(BaseNames.MenuOptionVolumeText),
+						Registrator.GenerateName(BaseNames.MenuOptionVolumeLeftButton),
+						Registrator.GenerateName(BaseNames.MenuOptionVolumeRightButton)
+					);
 				case BaseNames.MenuOptionResolution:
 					return CreateChooseFrame(
-						layout,
-						layout.OptionEntryWidth, layout.OptionEntryHeight, 
-						layout.OptionResolutionX, layout.OptionResolutionY, 
-						layout.OptionResolutionTextX, layout.OptionResolutionTextY, 
+						Layout.OptionEntryWidth, Layout.OptionEntryHeight, 
+						Layout.OptionResolutionX, Layout.OptionResolutionY, 
+						Layout.OptionResolutionTextX, Layout.OptionResolutionTextY, 
 						Settings.Width + "x" + Settings.Height,
-						layout.OptionResolutionLabelX, layout.OptionResolutionLabelY, "Resolution",
-						layout.OptionResolutionLeftButtonX, layout.OptionResolutionLeftButtonY,
-						layout.OptionResolutionRightButtonX, layout.OptionResolutionRightButtonY,
+						Layout.OptionResolutionLabelX, Layout.OptionResolutionLabelY, "Resolution",
+						Layout.OptionResolutionLeftButtonX, Layout.OptionResolutionLeftButtonY,
+						Layout.OptionResolutionRightButtonX, Layout.OptionResolutionRightButtonY,
 						Registrator.GenerateName(BaseNames.MenuOptionResolutionBackground), 
 						Registrator.GenerateName(BaseNames.MenuOptionResolutionText),
 						Registrator.GenerateName(BaseNames.MenuOptionResolutionLeftButton), 
@@ -263,14 +273,13 @@ namespace thrii
 					);
 				default:
 					return CreateChooseFrame(
-						layout,
-						layout.OptionEntryWidth, layout.OptionEntryHeight, 
-						layout.OptionGameSizeX, layout.OptionGameSizeY, 
-						layout.OptionGameSizeTextX, layout.OptionGameSizeTextY, 
+						Layout.OptionEntryWidth, Layout.OptionEntryHeight, 
+						Layout.OptionGameSizeX, Layout.OptionGameSizeY, 
+						Layout.OptionGameSizeTextX, Layout.OptionGameSizeTextY, 
 						Settings.GameSize.ToString(),
-						layout.OptionGameSizeLabelX, layout.OptionGameSizeLabelY, "Game Size",
-						layout.OptionGameSizeLeftButtonX, layout.OptionGameSizeLeftButtonY,
-						layout.OptionGameSizeRightButtonX, layout.OptionGameSizeRightButtonY,
+						Layout.OptionGameSizeLabelX, Layout.OptionGameSizeLabelY, "Game Size",
+						Layout.OptionGameSizeLeftButtonX, Layout.OptionGameSizeLeftButtonY,
+						Layout.OptionGameSizeRightButtonX, Layout.OptionGameSizeRightButtonY,
 						Registrator.GenerateName(BaseNames.MenuOptionGameSizeBackground), 
 						Registrator.GenerateName(BaseNames.MenuOptionGameSizeText),
 						Registrator.GenerateName(BaseNames.MenuOptionGameSizeLeftButton), 
@@ -280,7 +289,6 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateHudFrame(
-			Layout layout, 
 			int width, int height, int x, int y, int textX, int textY, string textString,
 			int labelX, int labelY, string labelText,
 			Name bgName = null, Name textName = null
@@ -291,7 +299,7 @@ namespace thrii
 			var textLabel = new Entity(Registrator.GenerateName(BaseNames.Text));
 
 			var tlDisplayComponent = new DisplayComponent();
-			var tlText = new Text(labelText, new Font("helvetica.otf"), (uint)layout.FontSize);
+			var tlText = new Text(labelText, new Font(Assets.Font), (uint)Layout.FontSize);
 			tlDisplayComponent.DisplayObject = tlText;
 
 			var tlPositionComponent = new PositionComponent();
@@ -302,7 +310,7 @@ namespace thrii
 			textLabel.AddComponent(tlPositionComponent);
 
 			var textFrame = CreateTextFrame(
-				layout, width, height, x, y, textX, textY, textString, bgName, textName
+				width, height, x, y, textX, textY, textString, bgName, textName
 			);
 
 			hudFrame.Add(textLabel);
@@ -312,39 +320,36 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateHud(
-			Layout layout,
 			BaseNames hudName
 		)
 		{
 			switch (hudName) {
 				case BaseNames.HudTime:
 					return CreateHudFrame(
-						layout,
-						layout.HudTimeWidth,
-						layout.HudTimeHeight,
-						layout.HudTimeX,
-						layout.HudTimeY,
-						layout.HudTimeTextX,
-						layout.HudTimeTextY,
+						Layout.HudTimeWidth,
+						Layout.HudTimeHeight,
+						Layout.HudTimeX,
+						Layout.HudTimeY,
+						Layout.HudTimeTextX,
+						Layout.HudTimeTextY,
 						"60",
-						layout.HudTimeLabelX,
-						layout.HudTimeLabelY,
+						Layout.HudTimeLabelX,
+						Layout.HudTimeLabelY,
 						"Time",
 						Registrator.GenerateName(BaseNames.Background),
 						Registrator.GenerateName(BaseNames.HudTimeText)
 					);
 				default:
 					return CreateHudFrame(
-						layout,
-						layout.HudScoreWidth,
-						layout.HudScoreHeight,
-						layout.HudScoreX,
-						layout.HudScoreY,
-						layout.HudScoreTextX,
-						layout.HudScoreTextY,
+						Layout.HudScoreWidth,
+						Layout.HudScoreHeight,
+						Layout.HudScoreX,
+						Layout.HudScoreY,
+						Layout.HudScoreTextX,
+						Layout.HudScoreTextY,
 						"0",
-						layout.HudScoreLabelX,
-						layout.HudScoreLabelY,
+						Layout.HudScoreLabelX,
+						Layout.HudScoreLabelY,
 						"Score",
 						Registrator.GenerateName(BaseNames.Background),
 						Registrator.GenerateName(BaseNames.HudScoreText)
@@ -353,13 +358,13 @@ namespace thrii
 		}
 
 		public static Entity CreateLabel(
-			Layout layout, int x, int y, string text, BaseNames baseName 
+			int x, int y, string text, BaseNames baseName 
 		)
 		{
 			var label = new Entity(Registrator.GenerateName(baseName));
 
 			var lDisplayComponent = new DisplayComponent();
-			lDisplayComponent.DisplayObject = new Text(text, new Font("helvetica.otf"), (uint)layout.FontSize);
+			lDisplayComponent.DisplayObject = new Text(text, new Font(Assets.Font), (uint)Layout.FontSize);
 
 			var lPositionComponent = new PositionComponent();
 			lPositionComponent.X = x;
@@ -376,7 +381,7 @@ namespace thrii
 		}
 
 		public static Entity CreateGem(
-			Layout layout, GemView gem, int x, int y
+			GemView gem, int x, int y
 		)
 		{
 			var gemEntity = new Entity(Registrator.GenerateName(BaseNames.Gem));
@@ -393,14 +398,17 @@ namespace thrii
 			gPositionComponent.Y = y;
 
 			var gCollisionComponent = new CollisionComponent();
-			gCollisionComponent.BoundingBox = new FloatRect(x ,y, layout.GemSize, layout.GemSize);
+			gCollisionComponent.BoundingBox = new FloatRect(x ,y, Layout.GemSize, Layout.GemSize);
 
 			var gAnimationComponent = new AnimationComponent();
 			gAnimationComponent.X = x;
 			gAnimationComponent.Y = y;
+			gAnimationComponent.Speed = Engine.GameSpeed;
+			gAnimationComponent.Scale = gDisplayComponent.DisplayObject.Scale;
 
 			var gGemComponent = new GemComponent();
 			gGemComponent.GemType = gem.GemType;
+			gGemComponent.GemSubType = gem.GemSubType;
 
 			gemEntity.AddComponent(gDisplayComponent);
 			gemEntity.AddComponent(gPositionComponent);
@@ -411,5 +419,59 @@ namespace thrii
 			return gemEntity;
 		}
 
+		public static Entity CreateDestroyer(
+			DestroyerView destroyer, float x, float y,
+			float animX, float animY
+		)
+		{
+			var destroyerEntity = new Entity(Registrator.GenerateName(BaseNames.Destroyer));
+
+			var dDisplayComponent = new DisplayComponent();
+			destroyer.DestroyerShape.Origin = new SFML.System.Vector2f(
+				destroyer.DestroyerShape.GetLocalBounds().Width / 2.0f,
+				destroyer.DestroyerShape.GetLocalBounds().Height / 2.0f
+			);
+			dDisplayComponent.DisplayObject = destroyer.DestroyerShape;
+
+			var dPositionComponent = new PositionComponent();
+			dPositionComponent.X = x;
+			dPositionComponent.Y = y;
+
+			float angle = 0.0f;
+			if (animX > x)
+			{
+				angle = 180.0f;
+			}
+			else if (animY < y)
+			{
+				angle = 90.0f;
+			}
+			else if (animY > y)
+			{
+				angle = 270.0f;
+			}
+			dPositionComponent.Rotation = angle;
+
+			var dCollisionComponent = new CollisionComponent();
+			dCollisionComponent.BoundingBox = new FloatRect(x, y, Layout.GemSize, Layout.GemSize);
+
+			var dAnimationComponent = new AnimationComponent();
+			dAnimationComponent.X = animX;
+			dAnimationComponent.Y = animY;
+			dAnimationComponent.Speed = Engine.GameSpeed;
+			dAnimationComponent.Scale = dDisplayComponent.DisplayObject.Scale;
+
+			var dGemComponent = new GemComponent();
+			dGemComponent.GemType = destroyer.GemType;
+			dGemComponent.GemSubType = GemSub.Gem;
+
+			destroyerEntity.AddComponent(dDisplayComponent);
+			destroyerEntity.AddComponent(dPositionComponent);
+			destroyerEntity.AddComponent(dCollisionComponent);
+			destroyerEntity.AddComponent(dAnimationComponent);
+			destroyerEntity.AddComponent(dGemComponent);
+
+			return destroyerEntity;
+		}
 	}
 }
