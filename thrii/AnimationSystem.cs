@@ -7,12 +7,10 @@ namespace thrii
 	public class AnimationSystem : System
 	{
 		List<Node> animationNodes;
-		Layout layout;
 
 		public AnimationSystem(Engine e) : base(e)
 		{
 			animationNodes = new List<Node>();
-			layout = new Layout();
 		}
 
 		protected override void GetNodes()
@@ -24,37 +22,82 @@ namespace thrii
 		{
 			GetNodes();
 
+			engine.AnimationEnded = true;
 			foreach (AnimationNode target in animationNodes)
 			{
-				var positionComponent = (PositionComponent)target.Entity.GetComponent("PositionComponent");
-
-				if (positionComponent.X < target.Animation.X)
+				if (target.Position.X < target.Animation.X)
 				{
-					positionComponent.X += engine.Time * 0.25f; 
+					engine.AnimationEnded = false;
+					target.Position.X += engine.Time * target.Animation.Speed; 
+					if (target.Position.X > target.Animation.X)
+					{
+						target.Position.X = target.Animation.X;
+						target.Animation.Speed = Engine.GameSpeed;
+					}
 				}
 
-				if (positionComponent.X > target.Animation.X)
+				if (target.Position.X > target.Animation.X)
 				{
-					positionComponent.X -= engine.Time * 0.25f; 
+					engine.AnimationEnded = false;
+					target.Position.X -= engine.Time * target.Animation.Speed; 
+					if (target.Position.X < target.Animation.X)
+					{
+						target.Position.X = target.Animation.X;
+						target.Animation.Speed = Engine.GameSpeed;
+					}
 				}
 
-				if (positionComponent.Y < target.Animation.Y)
+				if (target.Position.Y < target.Animation.Y)
 				{
-					positionComponent.Y += engine.Time * 0.25f; 
+					engine.AnimationEnded = false;
+					target.Position.Y += engine.Time * target.Animation.Speed; 
+					if (target.Position.Y > target.Animation.Y)
+					{
+						target.Position.Y = target.Animation.Y;
+						target.Animation.Speed = Engine.GameSpeed;
+					}
 				}
 
-				if (positionComponent.Y > target.Animation.Y)
+				if (target.Position.Y > target.Animation.Y)
 				{
-					positionComponent.Y -= engine.Time * 0.25f; 
+					engine.AnimationEnded = false;
+					target.Position.Y -= engine.Time * target.Animation.Speed; 
+					if (target.Position.Y < target.Animation.Y)
+					{
+						target.Position.Y = target.Animation.Y;
+						target.Animation.Speed = Engine.GameSpeed;
+
+					}
+				}
+
+				if (target.Display.DisplayObject.Scale.X > target.Animation.Scale.X &&
+				   	target.Display.DisplayObject.Scale.Y > target.Animation.Scale.Y)
+				{
+					engine.AnimationEnded = false;
+					target.Display.DisplayObject.Scale = new Vector2f(
+						target.Display.DisplayObject.Scale.X - 0.1f,
+						target.Display.DisplayObject.Scale.Y - 0.1f
+					);
 				}
 
 				if (engine.CheckClicked(target.Entity.Name))
 				{
-					positionComponent.Rotation += engine.Time * 0.25f;
+					//engine.AnimationEnded = false;
+					target.Position.Rotation += engine.Time * target.Animation.Speed / 2;
+					if (target.Position.Rotation >= 360)
+					{
+						target.Position.Rotation = 0;
+					}
 				}
-				else
+				else if (target.Entity.Name.BaseName == BaseNames.Gem)
 				{
-					positionComponent.Rotation = 0;
+					target.Position.Rotation = 0;
+					target.Animation.Speed = Engine.GameSpeed;
+				}
+
+				if (target.Entity.Name.BaseName == BaseNames.Destroyer)
+				{
+					engine.AnimationEnded = true;
 				}
 			}
 		}
