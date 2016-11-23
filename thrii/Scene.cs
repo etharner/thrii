@@ -52,6 +52,57 @@ namespace thrii
 		}
 	}
 
+	public class LevelScene : Scene
+	{
+		public LevelScene()
+		{
+			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+
+			int currentLevel = Settings.GetProgress();
+
+			for (var i = 0; i < 3; i++)
+			{
+				for (var j = 0; j < 6; j++)
+				{
+					int level = i * 6 + j + 1;
+
+					if (level <= currentLevel)
+					{
+						EntityList.AddRange(Spawner.CreateTextFrame(
+							Layout.HudLevelWidth, Layout.HudLevelHeight,
+							Layout.HudLevelDistance + (Layout.HudLevelWidth + Layout.HudLevelDistance / 4) * j,
+							Layout.HudLevelDistance + (Layout.HudLevelHeight + Layout.HudLevelDistance / 4) * i,
+							level > 9 ? Layout.HudLevelDistance + (Layout.HudLevelWidth + Layout.HudLevelDistance / 3) * j :
+							Layout.HudLevelDistance + Layout.HudLevelWidth / 3 +
+							(Layout.HudLevelWidth + Layout.HudLevelDistance / 5) * j,
+							Layout.HudLevelDistance + (Layout.HudLevelHeight + Layout.HudLevelDistance / 3) * i,
+							level.ToString(),
+							Registrator.GenerateName(BaseNames.Level), null, (uint)Layout.FontSize * 2,
+							i == 0 ? LevelDifficulty.Easy : i == 1 ? LevelDifficulty.Medium : LevelDifficulty.Hard
+						));
+					}
+					else
+					{
+						EntityList.AddRange(Spawner.CreateTextFrame(
+							Layout.HudLevelWidth, Layout.HudLevelHeight,
+							Layout.HudLevelDistance + (Layout.HudLevelWidth + Layout.HudLevelDistance / 4) * j,
+							Layout.HudLevelDistance + (Layout.HudLevelHeight + Layout.HudLevelDistance / 4) * i,
+							level > 9 ? Layout.HudLevelDistance + (Layout.HudLevelWidth + Layout.HudLevelDistance / 3) * j :
+							Layout.HudLevelDistance + Layout.HudLevelWidth / 3 +
+							(Layout.HudLevelWidth + Layout.HudLevelDistance / 5) * j,
+							Layout.HudLevelDistance + (Layout.HudLevelHeight + Layout.HudLevelDistance / 3) * i,
+							level.ToString(),
+							null, null, (uint)Layout.FontSize * 2, null
+						));
+					}
+				}
+			}
+
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.LevelExitToMenu));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.LevelNewGame));
+		}
+	}
+
 	public class SessionScene : Scene
 	{
 		public SessionScene()
@@ -92,7 +143,7 @@ namespace thrii
 			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
 
 			EntityList.Add(Spawner.CreateLabel(
-				Layout.MenuGameOverX, Layout.MenuGameOverY, "Game Over", BaseNames.Text
+				Layout.MenuGameOverX, Layout.MenuGameOverY, "Game Over", BaseNames.GameOver
 			));
 			EntityList.Add(Spawner.CreateLabel(
 				Layout.MenuScoreX, Layout.MenuScoreY, "Score: " + score, BaseNames.MenuScore

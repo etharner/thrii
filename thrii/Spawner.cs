@@ -14,7 +14,7 @@ namespace thrii
 
 			var sSprite = new Sprite(sTexture);
 			sSprite.Scale = new SFML.System.Vector2f(
-				Layout.GameSpriteWidth / sSprite.GetLocalBounds().Width, 
+				Layout.GameSpriteWidth / sSprite.GetLocalBounds().Width,
 				Layout.GameSpriteHeight / sSprite.GetLocalBounds().Height
 			);
 			sDisplayComponent.DisplayObject = sSprite;
@@ -30,8 +30,8 @@ namespace thrii
 		}
 
 		public static Entity CreateBackground(
-			int width, int height, int x, int y, 
-			Color color, bool isGlobalBackground, int outline = 0, Color outlineColor = new Color(), 
+			int width, int height, int x, int y,
+			Color color, bool isGlobalBackground, int outline = 0, Color outlineColor = new Color(),
 			Name name = null
 		)
 		{
@@ -65,9 +65,10 @@ namespace thrii
 		}
 
 		public static List<Entity> CreateTextFrame(
-			int width, int height, int x, int y, 
+			int width, int height, int x, int y,
 			int textX, int textY, string textString,
-			Name bgName = null, Name textName = null
+			Name bgName = null, Name textName = null,
+			uint fontSize = 0, LevelDifficulty? ld = null
 		)
 		{
 			var textFrame = new List<Entity>();
@@ -75,7 +76,12 @@ namespace thrii
 			var textEntity = new Entity(textName == null ? Registrator.GenerateName(BaseNames.Text) : textName);
 
 			var tDisplayComponent = new DisplayComponent();
-			var text = new Text(textString, new Font(Assets.Font), (uint)Layout.FontSize);
+			var text = new Text(textString, new Font(Assets.Font), fontSize == 0 ? (uint)Layout.FontSize : fontSize);
+			text.Color = Color.White;
+			if (ld != null)
+			{
+				text.Color = Colors.GemSelectedOutlineColor;
+			}
 			tDisplayComponent.DisplayObject = text;
 			textEntity.AddComponent(tDisplayComponent);
 
@@ -88,7 +94,21 @@ namespace thrii
 			tInterfaceComponent.Text = textString;
 			textEntity.AddComponent(tInterfaceComponent);
 
-			textFrame.Add(CreateBackground(width, height, x, y, Color.Transparent, false, 3, Color.White, bgName));
+			Color bgColor = Color.Transparent;
+			switch (ld)
+			{
+				case LevelDifficulty.Easy:
+					bgColor = Colors.HexagonGemColor;
+					break;
+				case LevelDifficulty.Medium:
+					bgColor = Colors.OctagonGemColor;
+					break;
+				case LevelDifficulty.Hard:
+					bgColor = Colors.RombGemColor;
+					break;
+			}
+
+			textFrame.Add(CreateBackground(width, height, x, y, bgColor, false, 3, Color.White, bgName));
 			textFrame.Add(textEntity);
 
 			return textFrame;
@@ -102,52 +122,68 @@ namespace thrii
 			{
 				case BaseNames.MenuNewGame:
 					return CreateTextFrame(
-						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
-						Layout.MenuNewGameX, Layout.MenuNewGameY, 
-						Layout.MenuNewGameTextX, Layout.MenuNewGameTextY, "New Game", 
-						Registrator.GenerateName(BaseNames.MenuNewGameBackground), 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.MenuNewGameX, Layout.MenuNewGameY,
+						Layout.MenuNewGameTextX, Layout.MenuNewGameTextY, "New Game",
+						Registrator.GenerateName(BaseNames.MenuNewGameBackground),
 						Registrator.GenerateName(BaseNames.MenuNewGameText)
 					);
 				case BaseNames.MenuSettings:
 					return CreateTextFrame(
-						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
-						Layout.MenuSettingsX, Layout.MenuSettingsY, 
-						Layout.MenuSettingsTextX, Layout.MenuSettingsTextY, "Settings", 
-						Registrator.GenerateName(BaseNames.MenuSettingsBackground), 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.MenuSettingsX, Layout.MenuSettingsY,
+						Layout.MenuSettingsTextX, Layout.MenuSettingsTextY, "Settings",
+						Registrator.GenerateName(BaseNames.MenuSettingsBackground),
 						Registrator.GenerateName(BaseNames.MenuSettingsText)
 					);
 				case BaseNames.MenuApply:
 					return CreateTextFrame(
-						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
-						Layout.MenuApplyX, Layout.MenuApplyY, 
-						Layout.MenuApplyTextX, Layout.MenuApplyTextY, "Apply", 
-						Registrator.GenerateName(BaseNames.MenuApplyBackground), 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.MenuApplyX, Layout.MenuApplyY,
+						Layout.MenuApplyTextX, Layout.MenuApplyTextY, "Apply",
+						Registrator.GenerateName(BaseNames.MenuApplyBackground),
 						Registrator.GenerateName(BaseNames.MenuApplyText)
 					);
 				case BaseNames.MenuBack:
 					return CreateTextFrame(
-						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
-						Layout.MenuBackX, Layout.MenuBackY, 
-						Layout.MenuBackTextX, Layout.MenuBackTextY, "Back", 
-						Registrator.GenerateName(BaseNames.MenuBackBackground), 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.MenuBackX, Layout.MenuBackY,
+						Layout.MenuBackTextX, Layout.MenuBackTextY, "Back",
+						Registrator.GenerateName(BaseNames.MenuBackBackground),
 						Registrator.GenerateName(BaseNames.MenuBackText)
 					);
 				case BaseNames.MenuExitToMenu:
 					return CreateTextFrame(
-						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
-						Layout.MenuSettingsX, Layout.MenuSettingsY, 
-						Layout.MenuExitToMenuTextX, Layout.MenuExitToMenuTextY, "Exit to Menu", 
-						Registrator.GenerateName(BaseNames.MenuExitToMenuBackground), 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.MenuSettingsX, Layout.MenuSettingsY,
+						Layout.MenuExitToMenuTextX, Layout.MenuExitToMenuTextY, "Exit to Menu",
+						Registrator.GenerateName(BaseNames.MenuExitToMenuBackground),
 						Registrator.GenerateName(BaseNames.MenuExitToMenuText)
+					);
+				case BaseNames.LevelExitToMenu:
+					return CreateTextFrame(
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.LevelExitToMenuX, Layout.LevelExitToMenuY,
+						Layout.LevelExitToMenuTextX, Layout.LevelExitToMenuTextY, "Exit to Menu",
+						Registrator.GenerateName(BaseNames.MenuExitToMenuBackground),
+						Registrator.GenerateName(BaseNames.MenuExitToMenuText)
+					);	
+				case BaseNames.LevelNewGame:
+					return CreateTextFrame(
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.LevelNewGameX, Layout.LevelNewGameY,
+						Layout.LevelNewGameTextX, Layout.LevelNewGameTextY, "Free Play",
+						Registrator.GenerateName(BaseNames.LevelNewGameBackground),
+						Registrator.GenerateName(BaseNames.LevelNewGameText)
 					);
 				default:
 					return CreateTextFrame(
-						Layout.MenuEntryWidth, Layout.MenuEntryHeight, 
-						Layout.MenuExitX, Layout.MenuExitY, 
-						Layout.MenuExitTextX, Layout.MenuExitTextY, "Exit", 
-						Registrator.GenerateName(BaseNames.MenuExitBackground), 
+						Layout.MenuEntryWidth, Layout.MenuEntryHeight,
+						Layout.MenuExitX, Layout.MenuExitY,
+						Layout.MenuExitTextX, Layout.MenuExitTextY, "Exit",
+						Registrator.GenerateName(BaseNames.MenuExitBackground),
 						Registrator.GenerateName(BaseNames.MenuExitText)
-					);	
+					);
 			}
 		}
 
@@ -155,7 +191,7 @@ namespace thrii
 			int width, int height, int x, int y, int textX, int textY, string textString,
 			int labelX, int labelY, string labelText,
 			int leftX, int leftY, int rightX, int rightY,
-			Name bgName = null, Name textName = null, 
+			Name bgName = null, Name textName = null,
 			Name leftName = null, Name rightName = null
 		)
 		{
@@ -242,7 +278,8 @@ namespace thrii
 			BaseNames optionName
 		)
 		{
-			switch (optionName){
+			switch (optionName)
+			{
 				case BaseNames.MenuOptionVolume:
 					return CreateChooseFrame(
 						Layout.OptionEntryWidth, Layout.OptionEntryHeight,
@@ -259,32 +296,32 @@ namespace thrii
 					);
 				case BaseNames.MenuOptionResolution:
 					return CreateChooseFrame(
-						Layout.OptionEntryWidth, Layout.OptionEntryHeight, 
-						Layout.OptionResolutionX, Layout.OptionResolutionY, 
-						Layout.OptionResolutionTextX, Layout.OptionResolutionTextY, 
+						Layout.OptionEntryWidth, Layout.OptionEntryHeight,
+						Layout.OptionResolutionX, Layout.OptionResolutionY,
+						Layout.OptionResolutionTextX, Layout.OptionResolutionTextY,
 						Settings.Width + "x" + Settings.Height,
 						Layout.OptionResolutionLabelX, Layout.OptionResolutionLabelY, "Resolution",
 						Layout.OptionResolutionLeftButtonX, Layout.OptionResolutionLeftButtonY,
 						Layout.OptionResolutionRightButtonX, Layout.OptionResolutionRightButtonY,
-						Registrator.GenerateName(BaseNames.MenuOptionResolutionBackground), 
+						Registrator.GenerateName(BaseNames.MenuOptionResolutionBackground),
 						Registrator.GenerateName(BaseNames.MenuOptionResolutionText),
-						Registrator.GenerateName(BaseNames.MenuOptionResolutionLeftButton), 
+						Registrator.GenerateName(BaseNames.MenuOptionResolutionLeftButton),
 						Registrator.GenerateName(BaseNames.MenuOptionResolutionRightButton)
 					);
 				default:
 					return CreateChooseFrame(
-						Layout.OptionEntryWidth, Layout.OptionEntryHeight, 
-						Layout.OptionGameSizeX, Layout.OptionGameSizeY, 
-						Layout.OptionGameSizeTextX, Layout.OptionGameSizeTextY, 
+						Layout.OptionEntryWidth, Layout.OptionEntryHeight,
+						Layout.OptionGameSizeX, Layout.OptionGameSizeY,
+						Layout.OptionGameSizeTextX, Layout.OptionGameSizeTextY,
 						Settings.GameSize.ToString(),
 						Layout.OptionGameSizeLabelX, Layout.OptionGameSizeLabelY, "Game Size",
 						Layout.OptionGameSizeLeftButtonX, Layout.OptionGameSizeLeftButtonY,
 						Layout.OptionGameSizeRightButtonX, Layout.OptionGameSizeRightButtonY,
-						Registrator.GenerateName(BaseNames.MenuOptionGameSizeBackground), 
+						Registrator.GenerateName(BaseNames.MenuOptionGameSizeBackground),
 						Registrator.GenerateName(BaseNames.MenuOptionGameSizeText),
-						Registrator.GenerateName(BaseNames.MenuOptionGameSizeLeftButton), 
+						Registrator.GenerateName(BaseNames.MenuOptionGameSizeLeftButton),
 						Registrator.GenerateName(BaseNames.MenuOptionGameSizeRightButton)
-					);	
+					);
 			}
 		}
 
@@ -323,7 +360,8 @@ namespace thrii
 			BaseNames hudName
 		)
 		{
-			switch (hudName) {
+			switch (hudName)
+			{
 				case BaseNames.HudTime:
 					return CreateHudFrame(
 						Layout.HudTimeWidth,
@@ -373,7 +411,7 @@ namespace thrii
 		}
 
 		public static Entity CreateLabel(
-			int x, int y, string text, BaseNames baseName 
+			int x, int y, string text, BaseNames baseName
 		)
 		{
 			var label = new Entity(Registrator.GenerateName(baseName));
@@ -413,7 +451,7 @@ namespace thrii
 			gPositionComponent.Y = y;
 
 			var gCollisionComponent = new CollisionComponent();
-			gCollisionComponent.BoundingBox = new FloatRect(x ,y, Layout.GemSize, Layout.GemSize);
+			gCollisionComponent.BoundingBox = new FloatRect(x, y, Layout.GemSize, Layout.GemSize);
 
 			var gAnimationComponent = new AnimationComponent();
 			gAnimationComponent.X = x;
