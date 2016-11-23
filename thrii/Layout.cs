@@ -1,107 +1,120 @@
 ﻿namespace thrii
 {
-	public class Layout
+	public static class Layout
 	{
-		public int GameSpriteWidth;
-		public int GameSpriteHeight;
-		public int GameSpriteX;
-		public int GameSpriteY;
+		public static int GameSpriteWidth;
+		public static int GameSpriteHeight;
+		public static int GameSpriteX;
+		public static int GameSpriteY;
+			
+		public static int FontSize;
+			   
+		public static int MenuEntryWidth;
+		public static int MenuEntryHeight;
+			  
+		public static int MenuNewGameX;
+		public static int MenuNewGameY;
+		public static int MenuNewGameTextX;
+		public static int MenuNewGameTextY;
+			 
+		public static int MenuSettingsX;
+		public static int MenuSettingsY;
+		public static int MenuSettingsTextX;
+		public static int MenuSettingsTextY;
+			  
+		public static int MenuExitX;
+		public static int MenuExitY;
+		public static int MenuExitTextX;
+		public static int MenuExitTextY;
+			 
+		public static int OptionEntryWidth;
+		public static int OptionEntryHeight;
+		public static int OptionEntryButtonSize;
+		public static int OptionEntryButtonMargin;
 
-		public int FontSize;
+		public static int OptionVolumeLabelX;
+		public static int OptionVolumeLabelY;
+		public static int OptionVolumeX;
+		public static int OptionVolumeY;
+		public static int OptionVolumeTextX;
+		public static int OptionVolumeTextY;
+		public static int OptionVolumeLeftButtonX;
+		public static int OptionVolumeLeftButtonY;
+		public static int OptionVolumeRightButtonX;
+		public static int OptionVolumeRightButtonY;
+			  
+		public static int OptionResolutionLabelX;
+		public static int OptionResolutionLabelY;
+		public static int OptionResolutionX;
+		public static int OptionResolutionY;
+		public static int OptionResolutionTextX;
+		public static int OptionResolutionTextY;
+		public static int OptionResolutionLeftButtonX;
+		public static int OptionResolutionLeftButtonY;
+		public static int OptionResolutionRightButtonX;
+		public static int OptionResolutionRightButtonY;
+			  
+		public static int OptionGameSizeLabelX;
+		public static int OptionGameSizeLabelY;
+		public static int OptionGameSizeX;
+		public static int OptionGameSizeY;
+		public static int OptionGameSizeTextX;
+		public static int OptionGameSizeTextY;
+		public static int OptionGameSizeLeftButtonX; 
+		public static int OptionGameSizeLeftButtonY;
+		public static int OptionGameSizeRightButtonX;
+		public static int OptionGameSizeRightButtonY;
+			  
+		public static int MenuApplyX;
+		public static int MenuApplyY;
+		public static int MenuApplyTextX;
+		public static int MenuApplyTextY;
+			
+		public static int MenuBackX;
+		public static int MenuBackY;
+		public static int MenuBackTextX;
+		public static int MenuBackTextY;
+			 
+		public static int MenuGameOverX;
+		public static int MenuGameOverY;
+			
+		public static int MenuScoreX;
+		public static int MenuScoreY;
+			
+		public static int MenuExitToMenuTextX;
+		public static int MenuExitToMenuTextY;
+	
+		public static int SessionBackgroundMargin;
+		public static int SessionBackgroundWidth;
+		public static int SessionBackgroundHeight;
+		public static int SessionBackgroundX;
+		public static int SessionBackgroundY;
+			
+		public static int HudTimeWidth;
+		public static int HudTimeHeight;
+		public static int HudTimeX;
+		public static int HudTimeY;
+		public static int HudTimeTextX;
+		public static int HudTimeTextY;
+		public static int HudTimeLabelX;
+		public static int HudTimeLabelY;
 
-		public int MenuEntryWidth;
-		public int MenuEntryHeight;
+		public static int HudScoreWidth;
+		public static int HudScoreHeight;
+		public static int HudScoreX;
+		public static int HudScoreY;
+		public static int HudScoreTextX;
+		public static int HudScoreTextY;
+		public static int HudScoreLabelX;
+		public static int HudScoreLabelY;
 
-		public int MenuNewGameX;
-		public int MenuNewGameY;
-		public int MenuNewGameTextX;
-		public int MenuNewGameTextY;
+		public static int GemMargin;
+		public static int GemSize;
+		public static int GemDistance;
+	
+		public static int BombSize;
 
-		public int MenuSettingsX;
-		public int MenuSettingsY;
-		public int MenuSettingsTextX;
-		public int MenuSettingsTextY;
-
-		public int MenuExitX;
-		public int MenuExitY;
-		public int MenuExitTextX;
-		public int MenuExitTextY;
-
-		public int OptionEntryWidth;
-		public int OptionEntryHeight;
-		public int OptionEntryButtonSize;
-		public int OptionEntryButtonMargin;
-
-		public int OptionResolutionLabelX;
-		public int OptionResolutionLabelY;
-		public int OptionResolutionX;
-		public int OptionResolutionY;
-		public int OptionResolutionTextX;
-		public int OptionResolutionTextY;
-		public int OptionResolutionLeftButtonX;
-		public int OptionResolutionLeftButtonY;
-		public int OptionResolutionRightButtonX;
-		public int OptionResolutionRightButtonY;
-
-		public int OptionGameSizeLabelX;
-		public int OptionGameSizeLabelY;
-		public int OptionGameSizeX;
-		public int OptionGameSizeY;
-		public int OptionGameSizeTextX;
-		public int OptionGameSizeTextY;
-		public int OptionGameSizeLeftButtonX; 
-		public int OptionGameSizeLeftButtonY;
-		public int OptionGameSizeRightButtonX;
-		public int OptionGameSizeRightButtonY;
-
-		public int MenuApplyX;
-		public int MenuApplyY;
-		public int MenuApplyTextX;
-		public int MenuApplyTextY;
-
-		public int MenuBackX;
-		public int MenuBackY;
-		public int MenuBackTextX;
-		public int MenuBackTextY;
-
-		public int MenuGameOverX;
-		public int MenuGameOverY;
-
-		public int MenuScoreX;
-		public int MenuScoreY;
-
-		public int MenuExitToMenuTextX;
-		public int MenuExitToMenuTextY;
-
-		public int SessionBackgroundMargin;
-		public int SessionBackgroundWidth;
-		public int SessionBackgroundHeight;
-		public int SessionBackgroundX;
-		public int SessionBackgroundY;
-
-		public int HudTimeWidth;
-		public int HudTimeHeight;
-		public int HudTimeX;
-		public int HudTimeY;
-		public int HudTimeTextX;
-		public int HudTimeTextY;
-		public int HudTimeLabelX;
-		public int HudTimeLabelY;
-
-		public int HudScoreWidth;
-		public int HudScoreHeight;
-		public int HudScoreX;
-		public int HudScoreY;
-		public int HudScoreTextX;
-		public int HudScoreTextY;
-		public int HudScoreLabelX;
-		public int HudScoreLabelY;
-
-		public int GemMargin;
-		public int GemSize;
-		public int GemDistance;
-
-		public Layout()
+		public static void Update()
 		{
 			GameSpriteWidth = Settings.Width / 3;
 			GameSpriteHeight = GameSpriteWidth;
@@ -133,6 +146,17 @@
 			OptionEntryButtonSize = MenuEntryHeight / 2;
 			OptionEntryButtonMargin = OptionEntryButtonSize;
 
+			OptionVolumeLabelX = MenuNewGameX + MenuEntryWidth / 4;
+			OptionVolumeLabelY = GameSpriteY + MenuEntryHeight * 2 + MenuEntryHeight / 2;
+			OptionVolumeX = MenuNewGameX;
+			OptionVolumeY = OptionVolumeLabelY + FontSize + FontSize / 3;
+			OptionVolumeTextX = OptionVolumeX + FontSize * 2 + FontSize / 2 + FontSize / 3;
+			OptionVolumeTextY = OptionVolumeY;
+			OptionVolumeLeftButtonX = OptionVolumeX - OptionEntryButtonMargin;
+			OptionVolumeLeftButtonY = OptionVolumeY + OptionEntryButtonSize + OptionEntryButtonSize / 10;
+			OptionVolumeRightButtonX = OptionVolumeX + MenuEntryWidth + OptionEntryButtonMargin;
+			OptionVolumeRightButtonY = OptionVolumeY + OptionEntryButtonSize - OptionEntryButtonSize / 10;
+
 			OptionResolutionLabelX = MenuNewGameX + MenuEntryWidth / 6;
 			OptionResolutionLabelY = MenuNewGameY;
 			OptionResolutionX = MenuNewGameX;
@@ -151,7 +175,7 @@
 			OptionGameSizeTextX = OptionGameSizeX + FontSize + FontSize * 2;
 			OptionGameSizeTextY = OptionGameSizeY;
 			OptionGameSizeLeftButtonX = OptionGameSizeX - OptionEntryButtonMargin;
-			OptionGameSizeLeftButtonY = OptionGameSizeY  + OptionEntryButtonSize + OptionEntryButtonSize / 10;
+			OptionGameSizeLeftButtonY = OptionGameSizeY + OptionEntryButtonSize + OptionEntryButtonSize / 10;
 			OptionGameSizeRightButtonX = OptionGameSizeX + MenuEntryWidth + OptionEntryButtonMargin;
 			OptionGameSizeRightButtonY = OptionGameSizeY + OptionEntryButtonSize - OptionEntryButtonSize / 10;
 
@@ -169,7 +193,7 @@
 			MenuGameOverY = MenuNewGameY - MenuEntryHeight * 2;
 
 			MenuScoreX = MenuSettingsX + MenuEntryWidth / 6;
-			MenuScoreY = MenuSettingsY - MenuEntryHeight - FontSize * 2;
+			MenuScoreY = MenuSettingsY - MenuEntryHeight - FontSize * 3 + FontSize / 2;
 
 			MenuExitToMenuTextX = MenuSettingsX + FontSize / 2;
 			MenuExitToMenuTextY = MenuSettingsTextY;
@@ -193,14 +217,16 @@
 			HudScoreHeight = MenuEntryHeight;
 			HudScoreX = Settings.Width - (Settings.Width - SessionBackgroundWidth - FontSize) / 2;
 			HudScoreY = SessionBackgroundY + MenuEntryHeight;
-			HudScoreTextX = HudScoreX + FontSize + FontSize / 3;
+			HudScoreTextX = HudScoreX + FontSize / 4;
 			HudScoreTextY = HudScoreY + FontSize / 4;
 			HudScoreLabelX = HudScoreX + FontSize / 3;
 			HudScoreLabelY = SessionBackgroundY;
 
 			GemMargin = SessionBackgroundWidth / 50;
-			GemSize = SessionBackgroundWidth / (Settings.GameSize * 2) - SessionBackgroundWidth / 100;
+			GemSize = SessionBackgroundWidth / Settings.GameSize / 2 - GemMargin / (Settings.GameSize / 4);
 			GemDistance = GemSize * 2 + GemSize / 3;
+
+			BombSize = GemSize * 2;
 		}
 	}
 }
