@@ -8,29 +8,47 @@ namespace thrii
 	{
 		List<System> systemList;
 		Dictionary<string, List<Node>> nodes;
+		bool needRestart;
+
+		public List<Name> RemoveList { get; set; }
 		public List<Name> LastClicked { get; set; }
 		public Drawer Renderer;
 		public Clock GlobalClock;
 		public Clock SessionClock;
 		public float Time;
+		public int Score;
+		public static float GameSpeed;
 		public GameState GameState;
 		public bool NeedSwitchScene;
+		public List<string> Playlist;
+
+		public bool AnimationEnded;
 
 		public Engine()
 		{
-			Renderer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Settings.IconPath);
+			Renderer = new Drawer(Settings.Width, Settings.Height, Settings.Name, Assets.Icon);
 
 			ResetSystems();
 
 			nodes = new Dictionary<string, List<Node>>();
 
+			needRestart = false;
+
+			RemoveList = new List<Name>();
+
 			LastClicked = new List<Name>();
 
 			GlobalClock = new Clock();
+			Score = 0;
 
-			GameState = GameState.MENU;
+			ChangeGameSpeed();
+
+			GameState = GameState.Menu;
 
 			NeedSwitchScene = true;
+			AnimationEnded = true;
+
+			Playlist = new List<string>();
 
 			Start();
 		}
@@ -45,7 +63,7 @@ namespace thrii
 			string nodeClass = node.GetType().Name;
 			if (!nodes.ContainsKey(nodeClass))
 			{
-				nodes[nodeClass] = new List<Node>() { node };
+				nodes[nodeClass] = new List<Node> { node };
 			}
 			else
 			{
@@ -53,12 +71,7 @@ namespace thrii
 			}
 		}
 
-		void RemoveNode(Node node, string nodeClass)
-		{
-			nodes[nodeClass].Remove(node);
-		}
-
-		void AddEntity(Entity entity)
+		public void AddEntity(Entity entity)
 		{
 			foreach (var nodeClass in NodeComponents.Relations.Keys)
 			{
@@ -84,34 +97,46 @@ namespace thrii
 			}
 		}
 
-		void RemoveEntity(Name entityName)
+		public void RemoveEntity(Name entityName)
 		{
 			foreach (var nodeClass in nodes.Keys)
 			{
-				foreach (var node in nodes[nodeClass])
-				{
-					if (node.Entity.Name == entityName)
-					{
-						RemoveNode(node, nodeClass);
-					}
-				}
+				nodes[nodeClass].RemoveAll(n => n.Entity.Name == entityName);
 			}
 		}
 
 		public void ResetSystems() {
+			Layout.Update();
+
+			if (systemList != null)
+			{
+				SoundSystem soundSystem = (SoundSystem)systemList.Find(
+					s => s.GetType().ToString() == GetType().Namespace + "." + "SoundSystem"
+				);
+				soundSystem.StopAll();
+			}
+
 			systemList = new List<System>(Enum.GetNames(typeof(SystemPriority)).Length);
 
 			AddSystem(new InputSystem(this), SystemPriority.Input);
 			AddSystem(new InterfaceSystem(this), SystemPriority.Interface);
 			AddSystem(new SceneSystem(this), SystemPriority.Scene);
 			AddSystem(new GemSystem(this), SystemPriority.Gem);
-			AddSystem(new AnimationSystem(this), SystemPriority.Animation);
+			AddSystem(new AnimationSystem(this), SystemPriority.Animation);		
 			AddSystem(new RenderSystem(this), SystemPriority.Render);
+
+			AddSystem(new SoundSystem(this), SystemPriority.Sound);
+
+			ChangeGameSpeed();
+			Score = 0;
+			needRestart = true;
 		}
 
 		public void SwitchScene(Scene scene) 
 		{
 			nodes.Clear();
+			Registrator.ClearNames();
+
 			foreach (var entity in scene.EntityList)
 			{
 				AddEntity(entity);
@@ -139,6 +164,13 @@ namespace thrii
 			return LastClicked.Exists(n => n == name);
 		}
 
+		public void ChangeGameSpeed()
+		{
+			float ratio = (float)Settings.Width / 
+			                             Settings.SupportedResolutions[Settings.SupportedResolutions.Count - 1].X;
+			GameSpeed = 0.25f * ratio;
+		}
+
 		public void Start()
 		{
 			while (Renderer.Window.IsOpen)
@@ -162,7 +194,17 @@ namespace thrii
 		{
 			foreach (System s in systemList)
 			{
+				if (needRestart)
+				{
+					needRestart = false;
+					break;
+				}
 				s.Update();
+			}
+
+			foreach (Name n in RemoveList)
+			{
+				RemoveEntity(n);
 			}
 		}
 	}
