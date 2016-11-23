@@ -45,7 +45,9 @@ namespace thrii
 				{
 					Shape shape = (Shape)(target.Display.DisplayObject);
 
-					if (target.Entity.Name.BaseName == BaseNames.Gem)
+					if (target.Entity.Name.BaseName == BaseNames.Gem || 
+					   	target.Entity.Name.BaseName == BaseNames.Destroyer
+					   )
 					{
 						target.Display.DisplayObject.Position = new SFML.System.Vector2f(
 							target.Position.X + shape.GetLocalBounds().Width / 2.0f, 
