@@ -17,6 +17,7 @@ namespace thrii
 		public Clock SessionClock;
 		public float Time;
 		public int Score;
+		public LevelInfo CurrentLevel;
 		public static float GameSpeed;
 		public GameState GameState;
 		public bool NeedSwitchScene;
@@ -39,7 +40,10 @@ namespace thrii
 			LastClicked = new List<Name>();
 
 			GlobalClock = new Clock();
+
 			Score = 0;
+
+			CurrentLevel = Levels.LevelsList[0];
 
 			ChangeGameSpeed();
 
@@ -107,6 +111,7 @@ namespace thrii
 
 		public void ResetSystems() {
 			Layout.Update();
+			Levels.Update();
 
 			if (systemList != null)
 			{
