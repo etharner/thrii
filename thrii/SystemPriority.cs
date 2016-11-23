@@ -7,6 +7,7 @@
 		Scene,
 		Gem,
 		Animation,
-		Render
+		Render,
+		Sound
 	}
 }
