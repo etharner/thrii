@@ -7,6 +7,7 @@ namespace thrii
 	public class Drawer
 	{
 		public RenderWindow Window { get; set; }
+		public bool JustCreated;
 
 		public Drawer(int width, int height, string name, string iconPath)
 		{
@@ -14,8 +15,11 @@ namespace thrii
 			windowSettings.AntialiasingLevel = 8;
 
 			Window = new RenderWindow(new VideoMode((uint)width, (uint)height), name, Styles.Close, windowSettings);
+			Window.SetFramerateLimit(60);
 			SetIcon(iconPath);
 			Window.Closed += OnClosed;
+
+			JustCreated = true;
 		}
 
 		void SetIcon(string iconPath)
