@@ -7,12 +7,10 @@ namespace thrii
 	public class Scene
 	{
 		public List<Entity> EntityList { get; }
-		protected Layout layout;
 
 		public Scene()
 		{
 			EntityList = new List<Entity>();
-			layout = new Layout();
 		}
 
 		public void AddEntity(Entity e)
@@ -30,12 +28,12 @@ namespace thrii
 	{
 		public MenuScene()
 		{
-			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
-			EntityList.Add(Spawner.CreateGameSprite(layout));
+			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+			EntityList.Add(Spawner.CreateGameSprite());
 
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuNewGame));
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuSettings));
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuExit));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuNewGame));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuSettings));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuExit));
 		}
 	}
 
@@ -43,14 +41,14 @@ namespace thrii
 	{
 		public SettingsScene()
 		{
-			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
-			EntityList.Add(Spawner.CreateGameSprite(layout));
+			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
 
-			EntityList.AddRange(Spawner.CreateOptionEntry(layout, BaseNames.MenuOptionResolution));
-			EntityList.AddRange(Spawner.CreateOptionEntry(layout, BaseNames.MenuOptionGameSize));
+			EntityList.AddRange(Spawner.CreateOptionEntry(BaseNames.MenuOptionVolume));
+			EntityList.AddRange(Spawner.CreateOptionEntry(BaseNames.MenuOptionResolution));
+			EntityList.AddRange(Spawner.CreateOptionEntry(BaseNames.MenuOptionGameSize));
 
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuApply));
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuBack));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuApply));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuBack));
 		}
 	}
 
@@ -58,32 +56,28 @@ namespace thrii
 	{
 		public SessionScene()
 		{
-			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
 			EntityList.Add(Spawner.CreateBackground(
-				layout,
-				layout.SessionBackgroundWidth,
-				layout.SessionBackgroundHeight, 
-				layout.SessionBackgroundX,
-				layout.SessionBackgroundY, 
+				Layout.SessionBackgroundWidth,
+				Layout.SessionBackgroundHeight, 
+				Layout.SessionBackgroundX,
+				Layout.SessionBackgroundY, 
 				Color.Transparent, true, 3, 
 				Color.White
 			));
-			EntityList.AddRange(Spawner.CreateHud(layout, BaseNames.HudTime));
-			EntityList.AddRange(Spawner.CreateHud(layout, BaseNames.HudScore));
-
-
+			EntityList.AddRange(Spawner.CreateHud(BaseNames.HudTime));
+			EntityList.AddRange(Spawner.CreateHud(BaseNames.HudScore));
 
 			var rnd = new Random();
 			for (int i = 0; i < Settings.GameSize; i++)
 			{
 				for (int j = 0; j < Settings.GameSize; j++)
 				{
-					var gem = new GemView((Gem)Enum.GetValues(typeof(Gem)).GetValue(rnd.Next(0, 5)), layout);
+					var gem = new GemView((Gem)Enum.GetValues(typeof(Gem)).GetValue(rnd.Next(0, 5)));
 					EntityList.Add(Spawner.CreateGem(
-						layout,
 						gem, 
-						layout.SessionBackgroundX + layout.GemMargin + layout.GemDistance * j, 
-						layout.SessionBackgroundY + layout.GemMargin + layout.GemDistance * i
+						Layout.SessionBackgroundX + Layout.GemMargin + Layout.GemDistance * j, 
+						Layout.SessionBackgroundY + Layout.GemMargin + Layout.GemDistance * i
 					));
 				}
 			}
@@ -92,18 +86,19 @@ namespace thrii
 
 	public class GameOverScene : Scene
 	{
-		public GameOverScene()
+		public GameOverScene(int score)
 		{
-			EntityList.Add(Spawner.CreateBackground(layout, Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+			EntityList.Add(Spawner.CreateBackground(Settings.Width, Settings.Height, 0, 0, Colors.BgColor, true));
+
 			EntityList.Add(Spawner.CreateLabel(
-				layout, layout.MenuGameOverX, layout.MenuGameOverY, "Game Over", BaseNames.Text
+				Layout.MenuGameOverX, Layout.MenuGameOverY, "Game Over", BaseNames.Text
 			));
 			EntityList.Add(Spawner.CreateLabel(
-				layout, layout.MenuScoreX, layout.MenuScoreY, "Score: ", BaseNames.MenuScore
+				Layout.MenuScoreX, Layout.MenuScoreY, "Score: " + score, BaseNames.MenuScore
 			));
 
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuNewGame));
-			EntityList.AddRange(Spawner.CreateMenuEntry(layout, BaseNames.MenuExitToMenu));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuNewGame));
+			EntityList.AddRange(Spawner.CreateMenuEntry(BaseNames.MenuExitToMenu));
 		}
 	}
 }
