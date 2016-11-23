@@ -5,12 +5,10 @@ namespace thrii
 	public class InterfaceSystem : System
 	{
 		List<Node> interfaceNodes;
-		int currentScore;
 
 		public InterfaceSystem(Engine e) : base(e)
 		{
 			interfaceNodes = new List<Node>();
-			currentScore = 0;
 		}
 
 		protected override void GetNodes()
@@ -29,7 +27,7 @@ namespace thrii
 					engine.LastClicked.Clear();
 					if (Settings.ResolutionIndex > 0)
 					{
-						Settings.SwitchResolution(Settings.ResolutionIndex - 1);
+						Settings.SwitchSettings(SettingsEntry.Resolution, Settings.ResolutionIndex - 1);
 						target.Interface.Text = Settings.Width + "x" + Settings.Height;
 					}
 				}
@@ -40,7 +38,7 @@ namespace thrii
 					engine.LastClicked.Clear();
 					if (Settings.ResolutionIndex < Settings.SupportedResolutions.Count - 1)
 					{
-						Settings.SwitchResolution(Settings.ResolutionIndex + 1);
+						Settings.SwitchSettings(SettingsEntry.Resolution, Settings.ResolutionIndex + 1);
 						target.Interface.Text = Settings.Width + "x" + Settings.Height;
 					}
 				}
@@ -51,7 +49,7 @@ namespace thrii
 					engine.LastClicked.Clear();
 					if (Settings.GameSizeIndex > 0)
 					{
-						Settings.SwitchGameSize(Settings.GameSizeIndex - 1);
+						Settings.SwitchSettings(SettingsEntry.GameSize, Settings.GameSizeIndex - 1);
 						target.Interface.Text = Settings.GameSize.ToString();
 					}
 				}
@@ -62,30 +60,53 @@ namespace thrii
 					engine.LastClicked.Clear();
 					if (Settings.GameSizeIndex < Settings.SupportedGameSizes.Count - 1)
 					{
-						Settings.SwitchGameSize(Settings.GameSizeIndex + 1);
+						Settings.SwitchSettings(SettingsEntry.GameSize, Settings.GameSizeIndex + 1);
 						target.Interface.Text = Settings.GameSize.ToString();
 					}
 				}
 
+				if (engine.CheckClicked(BaseNames.MenuOptionVolumeLeftButton) &&
+					target.Entity.Name.BaseName == BaseNames.MenuOptionVolumeText)
+				{
+					engine.LastClicked.Clear();
+					if (Settings.VolumeIndex > 0)
+					{
+						Settings.SwitchSettings(SettingsEntry.Volume, Settings.VolumeIndex - 1);
+						target.Interface.Text = Settings.Volume.ToString();
+					}
+				}
+
+				if (engine.CheckClicked(BaseNames.MenuOptionVolumeRightButton) &&
+					target.Entity.Name.BaseName == BaseNames.MenuOptionVolumeText)
+				{
+					engine.LastClicked.Clear();
+					if (Settings.VolumeIndex < Settings.SupportedVolumes.Count - 1)
+					{
+						Settings.SwitchSettings(SettingsEntry.Volume, Settings.VolumeIndex + 1);
+						target.Interface.Text = Settings.Volume.ToString();
+					}
+				}
+
+
 				if (target.Entity.Name.BaseName == BaseNames.HudTimeText)
 				{
-					var time = (int)(5 - engine.Clock.ElapsedTime.AsSeconds());
+					var time = (int)(61 - engine.SessionClock.ElapsedTime.AsSeconds());
 					target.Interface.Text = time.ToString();
-					if (time == 0)
+					if (time == -1)
 					{
 						engine.NeedSwitchScene = true;
-						engine.GameState = GameState.GAME_OVER;
+						engine.GameState = GameState.GameOver;
 					}
 				}
 
 				if (target.Entity.Name.BaseName == BaseNames.HudScoreText)
 				{
-					target.Interface.Text = currentScore.ToString();
+					target.Interface.Text = engine.Score.ToString();
 				}
 
 				if (target.Entity.Name.BaseName == BaseNames.MenuScore)
 				{
-					target.Interface.Text = "Score: " + currentScore;
+					target.Interface.Text = "Score: " + engine.Score;
 				}
 			}
 		}
