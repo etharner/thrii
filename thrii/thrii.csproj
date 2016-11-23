@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -71,6 +72,8 @@
     <Compile Include="GameState.cs" />
     <Compile Include="GemSystem.cs" />
     <Compile Include="AnimationSystem.cs" />
+    <Compile Include="Assets.cs" />
+    <Compile Include="SoundSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
