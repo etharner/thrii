@@ -54,30 +54,34 @@
     <Compile Include="Game.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="Component.cs" />
-    <Compile Include="System.cs" />
-    <Compile Include="Node.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="NodeComponents.cs" />
     <Compile Include="Spawner.cs" />
     <Compile Include="Colors.cs" />
-    <Compile Include="RenderSystem.cs" />
-    <Compile Include="InputSystem.cs" />
     <Compile Include="Layout.cs" />
     <Compile Include="Registrator.cs" />
     <Compile Include="GemView.cs" />
-    <Compile Include="InterfaceSystem.cs" />
-    <Compile Include="SystemPriority.cs" />
-    <Compile Include="SceneSystem.cs" />
     <Compile Include="GameState.cs" />
-    <Compile Include="GemSystem.cs" />
-    <Compile Include="AnimationSystem.cs" />
     <Compile Include="Assets.cs" />
-    <Compile Include="SoundSystem.cs" />
     <Compile Include="Levels.cs" />
+    <Compile Include="Systems\AnimationSystem.cs" />
+    <Compile Include="Systems\GemSystem.cs" />
+    <Compile Include="Systems\InputSystem.cs" />
+    <Compile Include="Systems\InterfaceSystem.cs" />
+    <Compile Include="Systems\RenderSystem.cs" />
+    <Compile Include="Systems\SceneSystem.cs" />
+    <Compile Include="Systems\SoundSystem.cs" />
+    <Compile Include="Systems\System.cs" />
+    <Compile Include="Systems\SystemPriority.cs" />
+    <Compile Include="Nodes\Component.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\NodeComponents.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Systems\" />
+    <Folder Include="Nodes\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Graphnode.SFML.Net.2.3.1\build\Graphnode.SFML.Net.targets" Condition="Exists('..\packages\Graphnode.SFML.Net.2.3.1\build\Graphnode.SFML.Net.targets')" />
