@@ -339,7 +339,7 @@ namespace thrii
 						Registrator.GenerateName(BaseNames.Background),
 						Registrator.GenerateName(BaseNames.HudTimeText)
 					);
-				default:
+				case BaseNames.HudScore:
 					return CreateHudFrame(
 						Layout.HudScoreWidth,
 						Layout.HudScoreHeight,
@@ -353,6 +353,21 @@ namespace thrii
 						"Score",
 						Registrator.GenerateName(BaseNames.Background),
 						Registrator.GenerateName(BaseNames.HudScoreText)
+					);
+				default:
+					return CreateHudFrame(
+						Layout.HudGoalWidth,
+						Layout.HudGoalHeight,
+						Layout.HudGoalX,
+						Layout.HudGoalY,
+						Layout.HudGoalTextX,
+						Layout.HudGoalTextY,
+						"0",
+						Layout.HudGoalLabelX,
+						Layout.HudGoalLabelY,
+						"Goal",
+						Registrator.GenerateName(BaseNames.Background),
+						Registrator.GenerateName(BaseNames.HudGoalText)
 					);
 			}
 		}

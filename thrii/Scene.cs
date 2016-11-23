@@ -67,6 +67,7 @@ namespace thrii
 			));
 			EntityList.AddRange(Spawner.CreateHud(BaseNames.HudTime));
 			EntityList.AddRange(Spawner.CreateHud(BaseNames.HudScore));
+			EntityList.AddRange(Spawner.CreateHud(BaseNames.HudGoal));
 
 			var rnd = new Random();
 			for (int i = 0; i < Settings.GameSize; i++)

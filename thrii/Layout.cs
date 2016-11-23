@@ -108,6 +108,15 @@
 		public static int HudScoreLabelX;
 		public static int HudScoreLabelY;
 
+		public static int HudGoalWidth;
+		public static int HudGoalHeight;
+		public static int HudGoalX;
+		public static int HudGoalY;
+		public static int HudGoalTextX;
+		public static int HudGoalTextY;
+		public static int HudGoalLabelX;
+		public static int HudGoalLabelY;
+
 		public static int GemMargin;
 		public static int GemSize;
 		public static int GemDistance;
@@ -221,6 +230,15 @@
 			HudScoreTextY = HudScoreY + FontSize / 4;
 			HudScoreLabelX = HudScoreX + FontSize / 3;
 			HudScoreLabelY = SessionBackgroundY;
+
+			HudGoalWidth = MenuEntryWidth / 2;
+			HudGoalHeight = MenuEntryHeight;
+			HudGoalX = Settings.Width - (Settings.Width - SessionBackgroundWidth - FontSize) / 2;
+			HudGoalY = SessionBackgroundY + MenuEntryHeight * 3;
+			HudGoalTextX = HudGoalX + FontSize / 4;
+			HudGoalTextY = HudGoalY + FontSize / 4;
+			HudGoalLabelX = HudGoalX + FontSize / 3;
+			HudGoalLabelY = SessionBackgroundY + MenuEntryHeight * 2;
 
 			GemMargin = SessionBackgroundWidth / 50;
 			GemSize = SessionBackgroundWidth / Settings.GameSize / 2 - GemMargin / (Settings.GameSize / 4);

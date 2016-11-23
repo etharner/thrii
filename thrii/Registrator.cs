@@ -58,6 +58,9 @@ namespace thrii
 		HudTime,
 		HudTimeText,
 
+		HudGoal,
+		HudGoalText,
+
 		Background,
 		Text,
 		Gem,
