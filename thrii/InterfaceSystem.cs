@@ -5,10 +5,12 @@ namespace thrii
 	public class InterfaceSystem : System
 	{
 		List<Node> interfaceNodes;
+		bool progressRaised;
 
 		public InterfaceSystem(Engine e) : base(e)
 		{
 			interfaceNodes = new List<Node>();
+			progressRaised = false;
 		}
 
 		protected override void GetNodes()
@@ -90,7 +92,7 @@ namespace thrii
 
 				if (target.Entity.Name.BaseName == BaseNames.HudTimeText)
 				{
-					var time = (int)(61 - engine.SessionClock.ElapsedTime.AsSeconds());
+					var time = (int)(engine.CurrentLevel.Time + 1 - engine.SessionClock.ElapsedTime.AsSeconds());
 					target.Interface.Text = time.ToString();
 					if (time == -1)
 					{
@@ -102,6 +104,28 @@ namespace thrii
 				if (target.Entity.Name.BaseName == BaseNames.HudScoreText)
 				{
 					target.Interface.Text = engine.Score.ToString();
+				}
+
+				if (target.Entity.Name.BaseName == BaseNames.HudGoalText)
+				{
+					target.Interface.Text = engine.CurrentLevel.Goal.ToString();
+				}
+
+				if (target.Entity.Name.BaseName == BaseNames.GameOver)
+				{
+					if (engine.Score >= engine.CurrentLevel.Goal)
+					{
+						target.Interface.Text = "You win!";
+						if (!progressRaised)
+						{
+							Settings.SetProgress(Settings.GetProgress() + 1);
+							progressRaised = true;
+						}
+					}
+					else
+					{
+						target.Interface.Text = "You lose";
+					}
 				}
 
 				if (target.Entity.Name.BaseName == BaseNames.MenuScore)

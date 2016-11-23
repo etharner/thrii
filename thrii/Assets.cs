@@ -6,6 +6,7 @@ namespace thrii
 	{
 		public static string Icon = "icon.png";
 		public static string Settings = "settings.xml";
+		public static string Progress = "progress.xml";
 		public static string Font = "helvetica.otf";
 		public static string GameLogo = "gameLogo.png";
 		public static string CircleBomb = "circleBomb.png";

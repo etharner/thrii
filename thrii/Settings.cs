@@ -19,6 +19,8 @@ namespace thrii
 	static class Settings
 	{
 		static string settingsFile = Assets.Settings;
+		static string progressFile = Assets.Progress;
+
 		public static List<int> SupportedVolumes = Enumerable.Range(0, 11).Select(n => n * 10).ToList();
 		public static List<SFML.System.Vector2i> SupportedResolutions = new List<SFML.System.Vector2i>
 		{
@@ -102,6 +104,35 @@ namespace thrii
 
 			xml.GetElementsByTagName(entry.ToString())[0].InnerText = newValue.ToString();
 			xml.Save(settingsFile);
+		}
+
+		public static void RestoreGameSize()
+		{
+			var xml = new XmlDocument();
+			xml.Load(settingsFile);
+
+			GameSize = int.Parse(xml.GetElementsByTagName("GameSize")[0].InnerText);
+		}
+
+		public static int GetProgress()
+		{
+			var xml = new XmlDocument();
+			xml.Load(progressFile);
+
+			return int.Parse(xml.GetElementsByTagName("Level")[0].InnerText);
+		}
+
+		public static void SetProgress(int level)
+		{
+			if (level > 18)
+			{
+				return;
+			}
+			var xml = new XmlDocument();
+			xml.Load(progressFile);
+
+			xml.GetElementsByTagName("Level")[0].InnerText = level.ToString();
+			xml.Save(progressFile);
 		}
 	}
 }
