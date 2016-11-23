@@ -18,6 +18,12 @@ namespace thrii
 		MenuExitBackground,
 		MenuExitText,
 
+		MenuOptionVolume,
+		MenuOptionVolumeBackground,
+		MenuOptionVolumeText,
+		MenuOptionVolumeLeftButton,
+		MenuOptionVolumeRightButton,
+
 		MenuOptionResolution,
 		MenuOptionResolutionBackground,
 		MenuOptionResolutionText,
@@ -54,7 +60,8 @@ namespace thrii
 
 		Background,
 		Text,
-		Gem
+		Gem,
+		Destroyer
 	}
 
 	public class Name
@@ -93,6 +100,11 @@ namespace thrii
 			{
 				registered.Remove(name);
 			}
+		}
+
+		public static void ClearNames()
+		{
+			registered.Clear();
 		}
 	}
 }
