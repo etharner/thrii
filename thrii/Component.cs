@@ -1,4 +1,5 @@
 ﻿using SFML.Graphics;
+using SFML.System;
 
 namespace thrii
 {
@@ -14,7 +15,10 @@ namespace thrii
 		public Transformable DisplayObject;
 	}
 
-	public class AnimationComponent : PositionComponent {}
+	public class AnimationComponent : PositionComponent {
+		public float Speed;
+		public Vector2f Scale;
+	}
 
 	public class CollisionComponent
 	{
@@ -29,5 +33,6 @@ namespace thrii
 	public class GemComponent
 	{
 		public Gem GemType;
+		public GemSub GemSubType;
 	}
 }
