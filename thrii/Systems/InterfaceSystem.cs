@@ -116,7 +116,7 @@ namespace thrii
 					if (engine.Score >= engine.CurrentLevel.Goal)
 					{
 						target.Interface.Text = "You win!";
-						if (!progressRaised)
+						if (!progressRaised && engine.CurrentLevel != Levels.LevelsList[0])
 						{
 							Settings.SetProgress(Settings.GetProgress() + 1);
 							progressRaised = true;
